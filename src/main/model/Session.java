@@ -6,8 +6,27 @@ import java.util.List;
 // session notes, and additional notes
 public class Session {
 
-    // EFFECTS: constructs a session with all empty fields
-    public Session() {
+    // EFFECTS: constructs a session with the given name, no items in any list,
+    // and assigns it a unique id
+    public Session(String name) {
+        // stub
+    }
+
+    // EFFECTS: returns the id of this session
+    public int getId() {
+        // stub
+        return 0;
+    }
+
+    // EFFECTS: returns the name of this session
+    public String getName() {
+        // stub
+        return null;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the name of this session
+    public void setName(String name) {
         // stub
     }
 
