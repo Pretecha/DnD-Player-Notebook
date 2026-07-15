@@ -44,5 +44,5 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 - As a user, I want to be able to remove a session from the list of sessions
 
 - As a user, I want to be able to select a character from the hub and be taken directly to the session that character belongs to
-- As a user, I want to be able to mark a session as my currently active session for quick access from the hub
+- As a user, I want to be able to pin a session as my currently active session for quick access from the hub
 
