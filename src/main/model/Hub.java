@@ -28,8 +28,8 @@ public class Hub {
         return null;
     }
 
-    // EFFECTS: view a character's basic info in hub
-    public Character viewCharacterFromHub(int id) {
+    // EFFECTS: returns a character with the given id in hub, or null if none exists
+    public Character getCharacterFromHub(int id) {
         // stub
         return null;
     }
@@ -56,6 +56,13 @@ public class Hub {
         // stub
     }
 
+    // EFFECTS: returns the session currently selected as active, or null if none
+    // has been selected
+    public Session getCurrentSession() {
+        // stub
+        return null;
+    }
+
     // REQUIRES: session with the given id is present in sessions AND that session
     // is not present in pinnedSessions
     // MODIFIES: this
@@ -69,5 +76,11 @@ public class Hub {
     // EFFECTS: remove selected session from list of pinned sessions
     public void unpinSession(int id) {
         // stub
+    }
+
+    // EFFECTS: returns the list of ids of all sessions currently pinned
+    public List<Integer> getPinnedSessions() {
+        // stub
+        return null;
     }
 }
