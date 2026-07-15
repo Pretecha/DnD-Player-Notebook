@@ -88,7 +88,7 @@ public class Session {
 
     // EFFECTS: returns the character with the given id, or null if none exists
     public Character getCharacter(int id) {
-        for (Character c : characters){
+        for (Character c : characters) {
             if (c.getId() == id) {
                 return c;
             }
@@ -99,7 +99,7 @@ public class Session {
     // EFFECTS: returns the dice calculation with the given id, or null if none
     // exists
     public DiceCalculation getDiceCalculation(int id) {
-        for (DiceCalculation d : diceCalculations){
+        for (DiceCalculation d : diceCalculations) {
             if (d.getId() == id) {
                 return d;
             }
@@ -109,7 +109,7 @@ public class Session {
 
     // EFFECTS: returns the dice roll with the given id, or null if none exists
     public DiceRoll getDiceRoll(int id) {
-        for (DiceRoll d : diceRolls){
+        for (DiceRoll d : diceRolls) {
             if (d.getId() == id) {
                 return d;
             }
@@ -119,7 +119,7 @@ public class Session {
 
     // EFFECTS: returns the session note with the given id, or null if none exists
     public SessionNote getSessionNote(int id) {
-        for (SessionNote s : sessionNotes){
+        for (SessionNote s : sessionNotes) {
             if (s.getId() == id) {
                 return s;
             }
@@ -130,7 +130,7 @@ public class Session {
     // EFFECTS: returns the additional note with the given id, or null if none
     // exists
     public AdditionalNote getAdditionalNote(int id) {
-        for (AdditionalNote a : additionalNotes){
+        for (AdditionalNote a : additionalNotes) {
             if (a.getId() == id) {
                 return a;
             }
@@ -167,7 +167,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a character in session
     public void deleteCharacter(int id) {
-        for (Character c : characters){
+        for (Character c : characters) {
             if (c.getId() == id) {
                 characters.remove(c);
                 break;
@@ -179,7 +179,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a dice calculation in session
     public void deleteDiceCalculation(int id) {
-        for (DiceCalculation d : diceCalculations){
+        for (DiceCalculation d : diceCalculations) {
             if (d.getId() == id) {
                 diceCalculations.remove(d);
                 break;
@@ -191,7 +191,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a dice roll in session
     public void deleteDiceRoll(int id) {
-        for (DiceRoll d : diceRolls){
+        for (DiceRoll d : diceRolls) {
             if (d.getId() == id) {
                 diceRolls.remove(d);
                 break;
@@ -203,7 +203,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a session note in session
     public void deleteSessionNote(int id) {
-        for (SessionNote s : sessionNotes){
+        for (SessionNote s : sessionNotes) {
             if (s.getId() == id) {
                 sessionNotes.remove(s);
                 break;
@@ -215,7 +215,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete an additional note in session
     public void deleteAdditionalNote(int id) {
-        for (AdditionalNote a : additionalNotes){
+        for (AdditionalNote a : additionalNotes) {
             if (a.getId() == id) {
                 additionalNotes.remove(a);
                 break;

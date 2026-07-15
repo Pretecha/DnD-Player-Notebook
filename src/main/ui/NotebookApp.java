@@ -4,13 +4,13 @@ package ui;
 public class NotebookApp {
 
     // runs the application
-    public NotebookApp(){
+    public NotebookApp() {
         runApp();
     }
 
     // MODIFIES: this
     // EFFECTS: process user input
-    public void runApp(){
-        //stub
+    public void runApp() {
+        // stub
     }
 }
