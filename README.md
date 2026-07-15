@@ -14,28 +14,29 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 
 **Everything** that this application offers is customizable to allow for homebrews and special conditions.
 
+
 ## User Stories
 
-- As a user, I want to be able to add a character to a session
-- As a user, I want to be able to add a dice calculation to a session
-- As a user, I want to be able to add a dice roll to a session
-- As a user, I want to be able to add a session note to a session
-- As a user, I want to be able to add an additional note to a session
-- As a user, I want to be able to add a session to the list of sessions
+- As a user, I want to be able to add a character to a session, specifying a name, level, and stats
+- As a user, I want to be able to add a dice calculation to a session, specifying dice included and lowest, average, and highest results
+- As a user, I want to be able to add a dice roll to a session, specifying dice type, number and rolling to get a result
+- As a user, I want to be able to add a session note to a session, specifying a title and text content
+- As a user, I want to be able to add an additional note to a session, specifying a title and text content
+- As a user, I want to be able to add a session to the list of sessions, specifying a name
 
-- As a user, I want to be able to view all characters added to a session
-- As a user, I want to be able to view all dice calculation added to a session
-- As a user, I want to be able to view all dice rolls added to a session
-- As a user, I want to be able to view all session notes added to a session
-- As a user, I want to be able to view all additional notes added to a session
-- As a user, I want to be able to view all sessions in the hub of the application
+- As a user, I want to be able to view all characters added to a session, showing each character's name, level, and stats
+- As a user, I want to be able to view all dice calculations added to a session, showing die types and results
+- As a user, I want to be able to view all dice rolls added to a session, showing each roll's die type and result
+- As a user, I want to be able to view all session notes added to a session, showing each note's title and text content
+- As a user, I want to be able to view all additional notes added to a session, showing each note's title and text content
+- As a user, I want to be able to view all sessions in the hub of the application, showing each session's name
 
-- As a user, I want to be able to view and edit any existing character added to a session
-- As a user, I want to be able to view and edit any existing dice calculation added to a session
+- As a user, I want to be able to view and edit any existing character added to a session, including their name, level, and stats
+- As a user, I want to be able to view and edit any existing dice calculation added to a session, including its die types and result
 - As a user, I want to be able to view and edit any existing dice roll added to a session
-- As a user, I want to be able to view and edit any existing session note added to a session
-- As a user, I want to be able to view and edit any existing additional note added to a session
-- As a user, I want to be able to view and edit any existing session added to the list of sessions
+- As a user, I want to be able to view and edit any existing session note added to a session, including its title and text content
+- As a user, I want to be able to view and edit any existing additional note added to a session, including its title and text content
+- As a user, I want to be able to view and edit any existing session added to the list of sessions, including its name
 
 - As a user, I want to be able to remove a character from a session
 - As a user, I want to be able to remove a dice roll from a session
