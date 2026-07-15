@@ -19,11 +19,7 @@ class DiceRollTest {
     void testConstructor() {
         assertEquals(0, diceRoll.getResult());
         assertEquals(-1, diceRoll.getSessionId());
-        assertEquals(0, diceRoll.getDice().get(4));
         assertEquals(2, diceRoll.getDice().get(6));
-        assertEquals(0, diceRoll.getDice().get(8));
-        assertEquals(0, diceRoll.getDice().get(10));
-        assertEquals(0, diceRoll.getDice().get(12));
         assertEquals(1, diceRoll.getDice().get(20));
         assertFalse(diceRoll.getDice().containsKey(4));
     }

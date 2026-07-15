@@ -17,7 +17,7 @@ class DiceCalculationTest {
 
     @Test
     void testConstructor() {
-        assertEquals("Test", diceCalculation.getLabel());
+        assertEquals("Test", diceCalculation.getName());
         assertEquals(-1, diceCalculation.getSessionId());
         assertTrue(diceCalculation.getDice().isEmpty());
         assertEquals(0, diceCalculation.getLowestValue());

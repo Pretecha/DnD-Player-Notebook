@@ -18,7 +18,7 @@ class HubTest {
     void testConstructor() {
         assertNull(hub.getCurrentSession());
         assertTrue(hub.getSessions().isEmpty());
-        assertTrue(hub.getPinnedSessions().isEmpty());
+        assertTrue(hub.getPinnedSessionsId().isEmpty());
     }
 
     @Test
@@ -93,7 +93,7 @@ class HubTest {
         hub.addSession("Test");
         int id = hub.getSessions().get(0).getId();
         hub.pinSession(id);
-        assertTrue(hub.getPinnedSessions().contains(id));
+        assertTrue(hub.getPinnedSessionsId().contains(id));
     }
 
     @Test
@@ -102,7 +102,7 @@ class HubTest {
         int id = hub.getSessions().get(0).getId();
         hub.pinSession(id);
         hub.unpinSession(id);
-        assertFalse(hub.getPinnedSessions().contains(id));
+        assertFalse(hub.getPinnedSessionsId().contains(id));
     }
 }
 

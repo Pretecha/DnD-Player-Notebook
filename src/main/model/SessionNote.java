@@ -3,51 +3,58 @@ package model;
 // Represents a session note with a title and text
 public class SessionNote {
 
+    private static int nextId = 0;
+
+    private int id;
+    private String title;
+    private String text;
+    private int sessionId;
+
     // EFFECTS: constructs a session note with the given title and no text,
     // and assigns it a unique id
     public SessionNote(String title) {
-        // stub
+        this.id = nextId;
+        nextId++;
+        this.title = title;
+        this.text = "";
+        this.sessionId = 0;
     }
 
     // EFFECTS: returns the id of this session note
     public int getId() {
-        // stub
-        return 0;
+        return id;
     }
 
     // EFFECTS: returns the title of this session note
     public String getTitle() {
-        // stub
-        return null;
+        return title;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the title of this session note
     public void setTitle(String title) {
-        // stub
+        this.title = title;
     }
 
     // EFFECTS: returns the text of this session note
     public String getText() {
-        // stub
-        return null;
+        return text;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the text of this session note
     public void setText(String text) {
-        // stub
+        this.text = text;
     }
 
     // EFFECTS: returns the session id of the session this session note belongs to
     public int getSessionId() {
-        // stub
-        return 0;
+        return sessionId;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the session id of the session this session note belongs to
     public void setSessionId(int sessionId) {
-        // stub
+        this.sessionId = sessionId;
     }
 }

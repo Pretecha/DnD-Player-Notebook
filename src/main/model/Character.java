@@ -3,160 +3,176 @@ package model;
 // Represents a character with various dnd character stats and descriptions
 public class Character {
 
+    private static int nextId = 0;
+
+    private int id;
+    private String name;
+    private String levelAndClass;
+    private String race;
+    private String alignment;
+    private String background;
+    private int str;
+    private int con;
+    private int dex;
+    private int cha;
+    private int intel;
+    private int wis;
+    private int sessionId;
+
     // EFFECTS: constructs a character with the given name, and initializes
     // levelAndClass, race, alignment, and background as empty strings, all six
     // stats as 0, and assigns it a unique id
     public Character(String name) {
-        // stub
+        this.id = nextId;
+        nextId++;
+        this.name = name;
+        this.levelAndClass = "";
+        this.race = "";
+        this.alignment = "";
+        this.background = "";
+        this.str = 0;
+        this.con = 0;
+        this.dex = 0;
+        this.cha = 0;
+        this.intel = 0;
+        this.wis = 0;
+        this.sessionId = 0;
     }
 
     // EFFECTS: returns the id of this character
     public int getId() {
-        // stub
-        return 0;
+        return id;
     }
 
     // EFFECTS: returns the name of this character
     public String getName() {
-        // stub
-        return null;
+        return name;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the name of this character
     public void setName(String name) {
-        // stub
+        this.name = name;
     }
 
     // EFFECTS: returns the level and class of this character
     public String getLevelAndClass() {
-        // stub
-        return null;
+        return levelAndClass;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the level and class of this character
     public void setLevelAndClass(String levelAndClass) {
-        // stub
+        this.levelAndClass = levelAndClass;
     }
 
     // EFFECTS: returns the race of this character
     public String getRace() {
-        // stub
-        return null;
+        return race;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the race of this character
     public void setRace(String race) {
-        // stub
+        this.race = race;
     }
 
     // EFFECTS: returns the alignment of this character
     public String getAlignment() {
-        // stub
-        return null;
+        return alignment;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the alignment of this character
     public void setAlignment(String alignment) {
-        // stub
+        this.alignment = alignment;
     }
 
     // EFFECTS: returns the background of this character
     public String getBackground() {
-        // stub
-        return null;
+        return background;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the background of this character
     public void setBackground(String background) {
-        // stub
+        this.background = background;
     }
 
     // EFFECTS: returns the str stat of this character
     public int getStr() {
-        // stub
-        return 0;
+        return str;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the str stat of this character
     public void setStr(int str) {
-        // stub
+        this.str = str;
     }
 
     // EFFECTS: returns the con stat of this character
     public int getCon() {
-        // stub
-        return 0;
+        return con;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the con stat of this character
     public void setCon(int con) {
-        // stub
+        this.con = con;
     }
 
     // EFFECTS: returns the dex stat of this character
     public int getDex() {
-        // stub
-        return 0;
+        return dex;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the dex stat of this character
     public void setDex(int dex) {
-        // stub
+        this.dex = dex;
     }
 
     // EFFECTS: returns the cha stat of this character
     public int getCha() {
-        // stub
-        return 0;
+        return cha;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the cha stat of this character
     public void setCha(int cha) {
-        // stub
+        this.cha = cha;
     }
 
     // EFFECTS: returns the int stat of this character
     public int getIntel() {
-        // stub
-        return 0;
+        return intel;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the int stat of this character
     public void setIntel(int intel) {
-        // stub
+        this.intel = intel;
     }
 
     // EFFECTS: returns the wis stat of this character
     public int getWis() {
-        // stub
-        return 0;
+        return wis;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the wis stat of this character
     public void setWis(int wis) {
-        // stub
+        this.wis = wis;
     }
 
     // EFFECTS: returns the session id of the session this character belongs to
     public int getSessionId() {
-        // stub
-        return 0;
+        return sessionId;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the session id of the session this character belongs to
     public void setSessionId(int sessionId) {
-        // stub
+        this.sessionId = sessionId;
     }
 }
