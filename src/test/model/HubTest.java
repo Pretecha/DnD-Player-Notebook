@@ -105,3 +105,5 @@ class HubTest {
         assertFalse(hub.getPinnedSessions().contains(id));
     }
 }
+
+
