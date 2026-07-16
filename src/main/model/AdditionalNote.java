@@ -3,7 +3,7 @@ package model;
 // Represents an additional note with a title and text
 public class AdditionalNote {
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private int id;
     private String title;

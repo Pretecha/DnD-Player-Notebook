@@ -7,7 +7,7 @@ import java.util.List;
 // session notes, and additional notes
 public class Session {
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private int id;
     private String name;

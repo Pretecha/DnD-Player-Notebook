@@ -7,7 +7,7 @@ import java.util.Random;
 // Represents a dice roll with number of each dnd die, and the total after rolling
 public class DiceRoll {
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private int id;
     private Map<Integer, Integer> dice;

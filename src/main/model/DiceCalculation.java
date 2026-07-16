@@ -7,7 +7,7 @@ import java.util.HashMap;
 // the lowest possible, average, and highest possible value of the combination
 public class DiceCalculation {
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private int id;
     private String name;

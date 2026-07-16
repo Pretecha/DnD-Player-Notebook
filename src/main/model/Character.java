@@ -3,7 +3,7 @@ package model;
 // Represents a character with various dnd character stats and descriptions
 public class Character {
 
-    private static int nextId = 0;
+    private static int nextId = 1;
 
     private int id;
     private String name;
