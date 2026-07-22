@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.json.JSONObject;
+
 class CharacterTest {
 
     private Character character;
@@ -35,5 +37,34 @@ class CharacterTest {
     void testIdsAreUnique() {
         Character c2 = new Character("Test Subject 2");
         assertNotEquals(character.getId(), c2.getId());
+    }
+
+    @Test
+    void testCharacterJson() {
+        JSONObject characterJson = character.toJsonObject();
+        assertEquals(character.getId(), characterJson.getInt("id"));
+        assertEquals(character.getName(), characterJson.getString("name"));
+        assertEquals(character.getLevelAndClass(), characterJson.getString("levelAndClass"));
+        assertEquals(character.getRace(), characterJson.getString("race"));
+        assertEquals(character.getAlignment(), characterJson.getString("alignment"));
+        assertEquals(character.getBackground(), characterJson.getString("background"));
+        assertEquals(character.getStr(), characterJson.getInt("str"));
+        assertEquals(character.getCon(), characterJson.getInt("con"));
+        assertEquals(character.getDex(), characterJson.getInt("dex"));
+        assertEquals(character.getCha(), characterJson.getInt("cha"));
+        assertEquals(character.getIntel(), characterJson.getInt("intel"));
+        assertEquals(character.getWis(), characterJson.getInt("wis"));
+        assertEquals(character.getSessionId(), characterJson.getInt("sessionId"));
+    }
+
+    @Test
+    void testSetId() {
+        Character c2 = new Character("Test Subject 2");
+        int id = c2.getId();
+        c2.setId(id + 1);
+        assertEquals(id + 1, c2.getId());
+        c2.setId(0);
+        Character c3 = new Character("Test Subject 3");
+        assertEquals(id + 2, c3.getId());
     }
 }
