@@ -1,23 +1,37 @@
 {
     "sessions": [{
         "characters": [{
-            "wis": 10,
+            "wis": 17,
             "con": 14,
-            "levelAndClass": "Lv 6 Artificer",
+            "levelAndClass": "Lv 6 Peace Cleric",
             "race": "Autognome",
             "sessionId": 1,
-            "intel": 17,
+            "intel": 10,
             "str": 8,
             "background": "Hermit",
             "dex": 14,
             "name": "TestSubject",
             "id": 1,
-            "alignment": "Chaotic Neutral",
+            "alignment": "Chaotic Good",
             "cha": 12
         }],
         "name": "Test",
         "id": 1,
-        "diceCalculations": [],
+        "diceCalculations": [{
+            "name": "Expertise Advantage Initiative",
+            "dice": [
+                {
+                    "count": 14,
+                    "sides": 1
+                },
+                {
+                    "count": 2,
+                    "sides": 20
+                }
+            ],
+            "id": 1,
+            "sessionId": 1
+        }],
         "sessionNotes": [],
         "additionalNotes": [],
         "diceRolls": []

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
+import persistence.JsonRead;
 import persistence.JsonWrite;
 import java.io.*;
 
@@ -18,15 +19,21 @@ public class NotebookApp {
     private String stage;
     private static final String DATA = "./data/storeddata.json";
     private JsonWrite jsonWriter;
+    private JsonRead jsonReader;
 
     // EFFECTS: constructs a new NotebookApp with an empty hub, initializes the
     // input
     // scanner, sets the stage to "hub", and starts running the application
-    public NotebookApp() {
-        mainHub = new Hub();
+    public NotebookApp() throws FileNotFoundException {
         scanner = new Scanner(System.in);
         stage = "hub";
         jsonWriter = new JsonWrite(DATA);
+        jsonReader = new JsonRead(DATA);
+        try {
+            mainHub = jsonReader.read();
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + DATA);
+        }
         runApp();
     }
 
@@ -587,8 +594,8 @@ public class NotebookApp {
                 } else {
                     System.out.println(calc.getId() + " " + calc.getName() + ": " + formatDice(calc.getDice()));
                     System.out.println("Please select the option you wish to edit:");
-                    System.out.println("1. Add Dice Calculation");
-                    System.out.println("2. Edit Dice Calculation");
+                    System.out.println("1. Rename Calculation");
+                    System.out.println("2. Update Calculation");
                     switch (readInt()) {
                         case 1:
                             System.out.println("Please enter new name");
