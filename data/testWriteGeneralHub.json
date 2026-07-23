@@ -1,0 +1,26 @@
+{
+    "sessions": [{
+        "characters": [{
+            "wis": 0,
+            "con": 0,
+            "levelAndClass": "",
+            "race": "Autognome",
+            "sessionId": 59,
+            "intel": 0,
+            "str": 0,
+            "background": "",
+            "dex": 0,
+            "name": "TestSubject",
+            "id": 46,
+            "alignment": "",
+            "cha": 0
+        }],
+        "name": "Test",
+        "id": 59,
+        "diceCalculations": [],
+        "sessionNotes": [],
+        "additionalNotes": [],
+        "diceRolls": []
+    }],
+    "pinnedSessions": [59]
+}

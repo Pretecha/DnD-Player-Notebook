@@ -4,6 +4,8 @@ import java.io.*;
 
 import model.Hub;
 
+// Represents a writter that gets data from Hub and convert it into a file
+// that represents a JSONObject of the current application state.
 public class JsonWrite {
     private PrintWriter writer;
     private String data;
