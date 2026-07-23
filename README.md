@@ -47,5 +47,5 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 - As a user, I want to be able to select a character from the hub and be taken directly to the session that character belongs to
 - As a user, I want to be able to pin a session as my currently active session for quick access from the hub
 
-- As a user, I want to be able to save the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, to file automatically closing the application.
-- As a user, I want to be able to load the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, in the exact state that I left it as, from file automatically.
+- As a user, I want to be able to save the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, to file automatically closing the application, and also be able to manually save whenever I choose to.
+- As a user, I want to be able to load the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, in the exact state that I left it as, from file automatically, and also be able to manually load whenever I choose to.

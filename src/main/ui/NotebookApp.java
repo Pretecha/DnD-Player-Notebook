@@ -49,7 +49,9 @@ public class NotebookApp {
                     System.out.println("1. View Sessions");
                     System.out.println("2. View Characters");
                     System.out.println("3. View Pinned Sessions");
-                    System.out.println("4. Quit");
+                    System.out.println("4. Load From File");
+                    System.out.println("5. Save To File");
+                    System.out.println("6. Quit");
                     switch (readInt()) {
                         case 1:
                             viewSessions();
@@ -61,6 +63,24 @@ public class NotebookApp {
                             viewPinnedSessions();
                             break;
                         case 4:
+                            try {
+                                mainHub = jsonReader.read();
+                                System.out.println("App State Loaded from " + DATA);
+                            } catch (IOException e) {
+                                System.out.println("Unable to read from file: " + DATA);
+                            }
+                            break;
+                        case 5:
+                            try {
+                                jsonWriter.open();
+                                jsonWriter.save(mainHub);
+                                jsonWriter.close();
+                                System.out.println("App State Saved at " + DATA);
+                            } catch (FileNotFoundException e) {
+                                System.out.println("File not found at " + DATA);
+                            }
+                            break;
+                        case 6:
                             stage = "quit";
                             break;
                     }
@@ -108,7 +128,6 @@ public class NotebookApp {
         } catch (FileNotFoundException e) {
             System.out.println("File not found at " + DATA);
         }
-
     }
 
     // MODIFIES: this
