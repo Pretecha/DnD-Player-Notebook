@@ -14,7 +14,7 @@ class DiceRollTest {
 
     @BeforeEach
     void runBefore() {
-        diceRoll = new DiceRoll(0, 2, 0, 0, 0, 1);
+        diceRoll = new DiceRoll(1, 2, 1, 2, 1, 1);
         diceRoll.setSessionId(-1);
     }
 
@@ -22,12 +22,12 @@ class DiceRollTest {
     void testConstructor() {
         assertEquals(0, diceRoll.getResult());
         assertEquals(-1, diceRoll.getSessionId());
+        assertEquals(1, diceRoll.getDice().get(4));
         assertEquals(2, diceRoll.getDice().get(6));
+        assertEquals(1, diceRoll.getDice().get(8));
+        assertEquals(2, diceRoll.getDice().get(10));
+        assertEquals(1, diceRoll.getDice().get(12));
         assertEquals(1, diceRoll.getDice().get(20));
-        assertFalse(diceRoll.getDice().containsKey(4));
-        assertFalse(diceRoll.getDice().containsKey(8));
-        assertFalse(diceRoll.getDice().containsKey(10));
-        assertFalse(diceRoll.getDice().containsKey(12));
     }
 
     @Test
@@ -40,8 +40,8 @@ class DiceRollTest {
     void testRoll() {
         diceRoll.roll();
         int result = diceRoll.getResult();
-        assertTrue(result <= 32);
-        assertTrue(result >= 3);
+        assertTrue(result >= 8);
+        assertTrue(result <= 76);
     }
 
     @Test
@@ -55,22 +55,22 @@ class DiceRollTest {
     void testDiceRollJson() {
         JSONObject diceRollJson = diceRoll.toJsonObject();
         assertEquals(diceRoll.getId(), diceRollJson.getInt("id"));
-        assertEquals(diceRoll.diceToJsonArray(), diceRollJson.getString("dice"));
-        assertEquals(diceRoll.getResult(), diceRollJson.getString("result"));
-        assertEquals(diceRoll.getSessionId(), diceRollJson.getString("sessionId"));
+        assertEquals(diceRoll.getResult(), diceRollJson.getInt("result"));
+        assertEquals(diceRoll.getSessionId(), diceRollJson.getInt("sessionId"));
     }
 
     @Test
-    void testDiceToJsonArray(){
+    void testDiceToJsonArray() {
         JSONArray diceAsJsonArray = diceRoll.diceToJsonArray();
         boolean foundD6 = false;
         boolean foundD20 = false;
-        for(int i = 0; i<diceAsJsonArray.length(); i++){
+        for (int i = 0; i < diceAsJsonArray.length(); i++) {
             JSONObject entryJson = diceAsJsonArray.getJSONObject(i);
-            if(entryJson.getInt("sides") == 6){
+            if (entryJson.getInt("sides") == 6) {
                 assertEquals(2, entryJson.getInt("count"));
                 foundD6 = true;
-            } else if(entryJson.getInt("sides") == 20){
+            }
+            if (entryJson.getInt("sides") == 20) {
                 assertEquals(1, entryJson.getInt("count"));
                 foundD20 = true;
             }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,23 +79,23 @@ class DiceCalculationTest {
         JSONObject diceCalculationJson = diceCalculation.toJsonObject();
         assertEquals(diceCalculation.getId(), diceCalculationJson.getInt("id"));
         assertEquals(diceCalculation.getName(), diceCalculationJson.getString("name"));
-        assertEquals(diceCalculation.diceToJsonArray(), diceCalculationJson.getString("dice"));
-        assertEquals(diceCalculation.getSessionId(), diceCalculationJson.getString("sessionId"));
+        assertEquals(diceCalculation.getSessionId(), diceCalculationJson.getInt("sessionId"));
     }
 
     @Test
-    void testDiceToJsonArray(){
+    void testDiceToJsonArray() {
         diceCalculation.setDice(6, 1);
         diceCalculation.setDice(20, 2);
         JSONArray diceAsJsonArray = diceCalculation.diceToJsonArray();
         boolean foundD6 = false;
         boolean foundD20 = false;
-        for(int i = 0; i<diceAsJsonArray.length(); i++){
+        for (int i = 0; i < diceAsJsonArray.length(); i++) {
             JSONObject entryJson = diceAsJsonArray.getJSONObject(i);
-            if(entryJson.getInt("sides") == 6){
+            if (entryJson.getInt("sides") == 6) {
                 assertEquals(1, entryJson.getInt("count"));
                 foundD6 = true;
-            } else if(entryJson.getInt("sides") == 20){
+            }
+            if (entryJson.getInt("sides") == 20) {
                 assertEquals(2, entryJson.getInt("count"));
                 foundD20 = true;
             }

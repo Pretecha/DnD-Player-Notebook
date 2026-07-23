@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 class SessionTest {
 
@@ -147,41 +149,192 @@ class SessionTest {
 
     @Test
     void testDeleteCharacter() {
+        Character c2 = new Character("Test Subject 2");
+        session.addCharacter(c2);
         session.addCharacter(character);
         session.deleteCharacter(character.getId());
-        assertTrue(session.getCharacters().isEmpty());
+        assertEquals(1, session.getCharacters().size());
         assertNull(session.getCharacter(character.getId()));
+        assertEquals(c2, session.getCharacter(c2.getId()));
     }
 
     @Test
     void testDeleteDiceCalculation() {
+        DiceCalculation d2 = new DiceCalculation("Test 2");
+        session.addDiceCalculation(d2);
         session.addDiceCalculation(diceCalculation);
         session.deleteDiceCalculation(diceCalculation.getId());
-        assertTrue(session.getDiceCalculations().isEmpty());
+        assertEquals(1, session.getDiceCalculations().size());
         assertNull(session.getDiceCalculation(diceCalculation.getId()));
+        assertEquals(d2, session.getDiceCalculation(d2.getId()));
     }
 
     @Test
     void testDeleteDiceRoll() {
+        DiceRoll r2 = new DiceRoll(1, 0, 0, 0, 0, 0);
+        session.addDiceRoll(r2);
         session.addDiceRoll(diceRoll);
         session.deleteDiceRoll(diceRoll.getId());
-        assertTrue(session.getDiceRolls().isEmpty());
+        assertEquals(1, session.getDiceRolls().size());
         assertNull(session.getDiceRoll(diceRoll.getId()));
+        assertEquals(r2, session.getDiceRoll(r2.getId()));
     }
 
     @Test
     void testDeleteSessionNote() {
+        SessionNote n2 = new SessionNote("Test 2");
+        session.addSessionNote(n2);
         session.addSessionNote(sessionNote);
         session.deleteSessionNote(sessionNote.getId());
-        assertTrue(session.getSessionNotes().isEmpty());
+        assertEquals(1, session.getSessionNotes().size());
         assertNull(session.getSessionNote(sessionNote.getId()));
+        assertEquals(n2, session.getSessionNote(n2.getId()));
     }
 
     @Test
     void testDeleteAdditionalNote() {
+        AdditionalNote n2 = new AdditionalNote("Test 2");
+        session.addAdditionalNote(n2);
         session.addAdditionalNote(additionalNote);
         session.deleteAdditionalNote(additionalNote.getId());
-        assertTrue(session.getAdditionalNotes().isEmpty());
+        assertEquals(1, session.getAdditionalNotes().size());
         assertNull(session.getAdditionalNote(additionalNote.getId()));
+        assertEquals(n2, session.getAdditionalNote(n2.getId()));
     }
+
+    @Test
+    void testSessionJson() {
+        JSONObject sessionJson = session.toJsonObject();
+        assertEquals(session.getId(), sessionJson.getInt("id"));
+        assertEquals(session.getName(), sessionJson.getString("name"));
+    }
+
+    @Test
+    void testCharactersToJsonArray() {
+        Character c2 = new Character("Test 2");
+        session.addCharacter(character);
+        session.addCharacter(c2);
+
+        JSONArray charactersAsJsonArray = session.charactersToJsonArray();
+        boolean foundFirst = false;
+        boolean foundSecond = false;
+        for (int i = 0; i < charactersAsJsonArray.length(); i++) {
+            JSONObject entryJson = charactersAsJsonArray.getJSONObject(i);
+            if (entryJson.getInt("id") == character.getId()) {
+                foundFirst = true;
+            }
+            if (entryJson.getInt("id") == c2.getId()) {
+                foundSecond = true;
+            }
+        }
+        assertTrue(foundFirst);
+        assertTrue(foundSecond);
+    }
+
+    @Test
+    void testDiceCalculationsToJsonArray() {
+        DiceCalculation d2 = new DiceCalculation("Test 2");
+        session.addDiceCalculation(diceCalculation);
+        session.addDiceCalculation(d2);
+
+        JSONArray diceCalculationsAsJsonArray = session.diceCalculationsToJsonArray();
+        boolean foundFirst = false;
+        boolean foundSecond = false;
+        for (int i = 0; i < diceCalculationsAsJsonArray.length(); i++) {
+            JSONObject entryJson = diceCalculationsAsJsonArray.getJSONObject(i);
+            if (entryJson.getInt("id") == diceCalculation.getId()) {
+                foundFirst = true;
+            }
+            if (entryJson.getInt("id") == d2.getId()) {
+                foundSecond = true;
+            }
+        }
+        assertTrue(foundFirst);
+        assertTrue(foundSecond);
+    }
+
+    @Test
+    void testDiceRollsToJsonArray() {
+        DiceRoll r2 = new DiceRoll(1, 0, 0, 0, 0, 0);
+        session.addDiceRoll(diceRoll);
+        session.addDiceRoll(r2);
+
+        JSONArray diceRollsAsJsonArray = session.diceRollsToJsonArray();
+        boolean foundFirst = false;
+        boolean foundSecond = false;
+        for (int i = 0; i < diceRollsAsJsonArray.length(); i++) {
+            JSONObject entryJson = diceRollsAsJsonArray.getJSONObject(i);
+            if (entryJson.getInt("id") == diceRoll.getId()) {
+                foundFirst = true;
+            }
+            if (entryJson.getInt("id") == r2.getId()) {
+                foundSecond = true;
+            }
+        }
+        assertTrue(foundFirst);
+        assertTrue(foundSecond);
+    }
+
+    @Test
+    void testSessionNotesToJsonArray() {
+        SessionNote n2 = new SessionNote("Test 2");
+        session.addSessionNote(sessionNote);
+        session.addSessionNote(n2);
+
+        JSONArray sessionNotesAsJsonArray = session.sessionNotesToJsonArray();
+        boolean foundFirst = false;
+        boolean foundSecond = false;
+        for (int i = 0; i < sessionNotesAsJsonArray.length(); i++) {
+            JSONObject entryJson = sessionNotesAsJsonArray.getJSONObject(i);
+            if (entryJson.getInt("id") == sessionNote.getId()) {
+                foundFirst = true;
+            }
+            if (entryJson.getInt("id") == n2.getId()) {
+                foundSecond = true;
+            }
+        }
+        assertTrue(foundFirst);
+        assertTrue(foundSecond);
+    }
+
+    @Test
+    void testAdditionalNotesToJsonArray() {
+        AdditionalNote n2 = new AdditionalNote("Test 2");
+        session.addAdditionalNote(additionalNote);
+        session.addAdditionalNote(n2);
+
+        JSONArray additionalNotesAsJsonArray = session.additionalNotesToJsonArray();
+        boolean foundFirst = false;
+        boolean foundSecond = false;
+        for (int i = 0; i < additionalNotesAsJsonArray.length(); i++) {
+            JSONObject entryJson = additionalNotesAsJsonArray.getJSONObject(i);
+            if (entryJson.getInt("id") == additionalNote.getId()) {
+                foundFirst = true;
+            }
+            if (entryJson.getInt("id") == n2.getId()) {
+                foundSecond = true;
+            }
+        }
+        assertTrue(foundFirst);
+        assertTrue(foundSecond);
+    }
+
+    @Test
+    void testSetId() {
+        Session s2 = new Session("Test 2");
+        int id = s2.getId();
+        s2.setId(id + 1);
+        assertEquals(id + 1, s2.getId());
+        s2.setId(0);
+        Session s3 = new Session("Test 3");
+        assertEquals(id + 2, s3.getId());
+    }
+
+    @Test
+    void testNameSetter() {
+        assertEquals("Test", session.getName());
+        session.setName("Test 2");
+        assertEquals("Test 2", session.getName());
+    }
+
 }
