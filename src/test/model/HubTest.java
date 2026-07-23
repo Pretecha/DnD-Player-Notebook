@@ -15,8 +15,8 @@ class HubTest {
     @BeforeEach
     void runBefore() {
         hub = new Hub();
-        hub.addSession("Test");
-        session = hub.getSessions().get(0);
+        session = new Session("Test");
+        hub.addSession(session);
     }
 
     @Test
@@ -30,16 +30,18 @@ class HubTest {
     void testAddSession() {
         assertEquals(1, hub.getSessions().size());
         assertEquals("Test", session.getName());
-        hub.addSession("Test 2");
+
+        Session s2 = new Session("Test 2");
+        hub.addSession(s2);
         assertEquals(2, hub.getSessions().size());
-        assertEquals("Test 2", hub.getSessions().get(1).getName());
+        assertEquals("Test 2", s2.getName());
     }
 
     @Test
     void testAddMultipleSessions() {
-        hub.addSession("Test 2");
+        hub.addSession(new Session("Test 2"));
         assertEquals(2, hub.getSessions().size());
-        hub.addSession("Test 3");
+        hub.addSession(new Session("Test 3"));
         assertEquals(3, hub.getSessions().size());
     }
 
@@ -55,6 +57,8 @@ class HubTest {
 
     @Test
     void testDeleteSession() {
+        Session s2 = new Session("Test 2");
+        hub.addSession(s2);
         hub.deleteSession(session.getId());
         assertTrue(hub.getSessions().isEmpty());
         assertNull(hub.getSession(session.getId()));
@@ -103,8 +107,8 @@ class HubTest {
 
     @Test
     void testHubJson() {
-        hub.addSession("Test 2");
-        Session s2 = hub.getSessions().get(1);
+        Session s2 = new Session("Test 2");
+        hub.addSession(s2);
         int id2 = s2.getId();
         hub.pinSession(id2);
         JSONObject hubJson = hub.toJsonObject();
@@ -128,7 +132,7 @@ class HubTest {
 
     @Test
     void testSessionsToJsonArray() {
-        hub.addSession("Test 2");
+        hub.addSession(new Session("Test 2"));
 
         JSONArray sessionsArray = hub.sessionsToJsonArray();
         assertEquals(2, sessionsArray.length());
@@ -162,5 +166,13 @@ class HubTest {
         JSONArray pinnedArray = hub.pinnedSessionsToJsonArray();
         assertEquals(1, pinnedArray.length());
         assertEquals(session.getId(), pinnedArray.getInt(0));
+    }
+
+    @Test
+    void testNoIdSelectCharacter(){
+        Character c = new Character("Test");
+        session.addCharacter(c);
+        hub.selectSessionWithCharacter(-1);
+        assertNull(hub.getCurrentSession());
     }
 }

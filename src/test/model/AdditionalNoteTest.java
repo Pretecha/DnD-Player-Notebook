@@ -49,4 +49,13 @@ class AdditionalNoteTest {
         AdditionalNote n3 = new AdditionalNote("Test 3");
         assertEquals(id + 2, n3.getId());
     }
+
+    @Test
+    void testSimpleSetters() {
+        additionalNote.setTitle("New Title");
+        additionalNote.setText("New text");
+
+        assertEquals("New Title", additionalNote.getTitle());
+        assertEquals("New text", additionalNote.getText());
+    }
 }

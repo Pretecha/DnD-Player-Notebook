@@ -49,4 +49,13 @@ class SessionNoteTest {
         SessionNote n3 = new SessionNote("Test 3");
         assertEquals(id + 2, n3.getId());
     }
+
+    @Test
+    void testSimpleSetters() {
+        sessionNote.setTitle("New Title");
+        sessionNote.setText("New text");
+
+        assertEquals("New Title", sessionNote.getTitle());
+        assertEquals("New text", sessionNote.getText());
+    }
 }

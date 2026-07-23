@@ -67,4 +67,31 @@ class CharacterTest {
         Character c3 = new Character("Test Subject 3");
         assertEquals(id + 2, c3.getId());
     }
+
+    @Test
+    void testSimpleSetters() {
+        character.setName("New Test");
+        character.setLevelAndClass("Level 5 Test");
+        character.setRace("Test Subject");
+        character.setAlignment("True Neutral");
+        character.setBackground("Scientist");
+        character.setStr(21);
+        character.setCon(22);
+        character.setDex(23);
+        character.setCha(23);
+        character.setIntel(25);
+        character.setWis(26);
+
+        assertEquals("New Test", character.getName());
+        assertEquals("Level 5 Test", character.getLevelAndClass());
+        assertEquals("Test Subject", character.getRace());
+        assertEquals("True Neutral", character.getAlignment());
+        assertEquals("Scientist", character.getBackground());
+        assertEquals(21, character.getStr());
+        assertEquals(22, character.getCon());
+        assertEquals(23, character.getDex());
+        assertEquals(24, character.getCha());
+        assertEquals(25, character.getIntel());
+        assertEquals(26, character.getWis());
+    }
 }

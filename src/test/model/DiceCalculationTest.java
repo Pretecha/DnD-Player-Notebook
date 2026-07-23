@@ -114,4 +114,11 @@ class DiceCalculationTest {
         DiceCalculation c3 = new DiceCalculation("Test 3");
         assertEquals(id + 2, c3.getId());
     }
+
+    @Test
+    void testSetName(){
+        assertEquals("Test", diceCalculation.getName());
+        diceCalculation.setName("Test 2");
+        assertEquals("Test 2", diceCalculation.getName());
+    }
 }
