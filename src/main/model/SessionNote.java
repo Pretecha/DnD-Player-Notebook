@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a session note with a title and text
 public class SessionNote {
 
@@ -56,5 +58,25 @@ public class SessionNote {
     // EFFECTS: sets the session id of the session this session note belongs to
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
+    }
+
+    // EFFECTS: returns this session note as a JSON object
+    public JSONObject toJsonObject() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("title", this.title);
+        json.put("text", this.text);
+        json.put("sessionId", this.sessionId);
+        return json;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the id of this session note to the given value; if the given id
+    // is greater than or equal to the next id, the next id is assigned as id + 1.
+    public void setId(int id) {
+        this.id = id;
+        if (id >= nextId) {
+            nextId = id + 1;
+        }
     }
 }

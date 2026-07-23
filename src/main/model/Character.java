@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a character with various dnd character stats and descriptions
 public class Character {
 
@@ -174,5 +176,34 @@ public class Character {
     // EFFECTS: sets the session id of the session this character belongs to
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
+    }
+
+    // EFFECTS: returns this character as a JSON object
+    public JSONObject toJsonObject() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("name", this.name);
+        json.put("levelAndClass", this.levelAndClass);
+        json.put("race", this.race);
+        json.put("alignment", this.alignment);
+        json.put("background", this.background);
+        json.put("str", this.str);
+        json.put("con", this.con);
+        json.put("dex", this.dex);
+        json.put("cha", this.cha);
+        json.put("intel", this.intel);
+        json.put("wis", this.wis);
+        json.put("sessionId", this.sessionId);
+        return json;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the id of this character to the given value; if the given id is
+    // greater than or equal to the next id, the next id is assigned as id + 1. 
+    public void setId(int id) {
+        this.id = id;
+        if (id >= nextId) {
+            nextId = id + 1;
+        }
     }
 }

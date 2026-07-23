@@ -3,6 +3,9 @@ package model;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 // Represents the hub of the application, where the user can access all other sections
 public class Hub {
 
@@ -19,8 +22,8 @@ public class Hub {
 
     // MODIFIES: this
     // EFFECTS: add a session to hub and give it an id
-    public void addSession(String name) {
-        sessions.add(new Session(name));
+    public void addSession(Session session) {
+        sessions.add(session);
     }
 
     // EFFECTS: returns the session with the given id, or null if none exists
@@ -48,14 +51,12 @@ public class Hub {
         return null;
     }
 
-    // REQUIRES: session with selected id is present in sessions
-    // MODIFIES: this
-    // EFFECTS: selects current session as active session.
+    // MODIFIES: this, currentSession
+    // EFFECTS: makes currentSession the session with the given id
     public void selectSession(int id) {
         currentSession = getSession(id);
     }
 
-    // REQUIRES: session with selected id is present in characters
     // MODIFIES: this
     // EFFECTS: selects the session which the current character belongs to as active
     // session.
@@ -63,21 +64,14 @@ public class Hub {
         for (Session s : sessions) {
             if (s.getCharacter(id) != null) {
                 currentSession = s;
-                break;
             }
         }
     }
 
-    // REQUIRES: session with selected id is present in sessions
     // MODIFIES: this
     // EFFECTS: delete a session in hub
     public void deleteSession(int id) {
-        for (Session s : sessions) {
-            if (s.getId() == id) {
-                sessions.remove(s);
-                break;
-            }
-        }
+        sessions.removeIf(s -> s.getId() == id);
     }
 
     // EFFECTS: returns the session currently selected as active, or null if none
@@ -104,5 +98,31 @@ public class Hub {
     // EFFECTS: returns the list of ids for sessions currently pinned
     public List<Integer> getPinnedSessionsId() {
         return pinnedSessionsId;
+    }
+
+    // EFFECTS: returns the state of this hub as a JSON object
+    public JSONObject toJsonObject() {
+        JSONObject hubAsJson = new JSONObject();
+        hubAsJson.put("sessions", sessionsToJsonArray());
+        hubAsJson.put("pinnedSessions", pinnedSessionsToJsonArray());
+        return hubAsJson;
+    }
+
+    // EFFECTS: returns the list of sessions as a JSON array
+    public JSONArray sessionsToJsonArray() {
+        JSONArray sessionsAsJson = new JSONArray();
+        for (Session session : sessions) {
+            sessionsAsJson.put(session.toJsonObject());
+        }
+        return sessionsAsJson;
+    }
+
+    // EFFECTS: returns the list of pinned sessions as a JSON array
+    public JSONArray pinnedSessionsToJsonArray() {
+        JSONArray pinnedSessionsAsJson = new JSONArray();
+        for (int id : pinnedSessionsId) {
+            pinnedSessionsAsJson.put(id);
+        }
+        return pinnedSessionsAsJson;
     }
 }

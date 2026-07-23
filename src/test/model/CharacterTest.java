@@ -78,7 +78,7 @@ class CharacterTest {
         character.setStr(21);
         character.setCon(22);
         character.setDex(23);
-        character.setCha(23);
+        character.setCha(24);
         character.setIntel(25);
         character.setWis(26);
 

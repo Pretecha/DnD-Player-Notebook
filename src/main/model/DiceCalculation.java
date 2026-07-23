@@ -3,6 +3,9 @@ package model;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 // Represents a dice calculation with number of each dnd die, and computes
 // the lowest possible, average, and highest possible value of the combination
 public class DiceCalculation {
@@ -99,5 +102,39 @@ public class DiceCalculation {
     // belongs to
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
+    }
+
+    // EFFECTS: returns this dice calculation as a JSON object
+    public JSONObject toJsonObject() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("name", this.name);
+        json.put("dice", diceToJsonArray());
+        json.put("sessionId", this.sessionId);
+        return json;
+    }
+
+    // EFFECTS: returns the dice map as a JSON array, each with a "sides" and
+    // "count" key
+    public JSONArray diceToJsonArray() {
+        JSONArray diceAsJson = new JSONArray();
+        for (Map.Entry<Integer, Integer> entry : dice.entrySet()) {
+            JSONObject entryJson = new JSONObject();
+            entryJson.put("sides", entry.getKey());
+            entryJson.put("count", entry.getValue());
+            diceAsJson.put(entryJson);
+        }
+        return diceAsJson;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the id of this dice calculation to the given value; if the
+    // given id is greater than or equal to the next id, the next id is assigned as
+    // id + 1.
+    public void setId(int id) {
+        this.id = id;
+        if (id >= nextId) {
+            nextId = id + 1;
+        }
     }
 }

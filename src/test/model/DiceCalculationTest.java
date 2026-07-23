@@ -116,7 +116,7 @@ class DiceCalculationTest {
     }
 
     @Test
-    void testSetName(){
+    void testSetName() {
         assertEquals("Test", diceCalculation.getName());
         diceCalculation.setName("Test 2");
         assertEquals("Test 2", diceCalculation.getName());

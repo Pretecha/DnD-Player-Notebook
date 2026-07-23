@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 // Represent a session with a list of characters, dice calculations, dice rolls,
 // session notes, and additional notes
 public class Session {
@@ -163,63 +166,101 @@ public class Session {
         return additionalNotes;
     }
 
-    // REQUIRES: character with the given id is present in characters
     // MODIFIES: this
     // EFFECTS: delete a character in session
     public void deleteCharacter(int id) {
-        for (Character c : characters) {
-            if (c.getId() == id) {
-                characters.remove(c);
-                break;
-            }
-        }
+        characters.removeIf(c -> c.getId() == id);
     }
 
-    // REQUIRES: dice calculation with the given id is present in diceCalculations
     // MODIFIES: this
     // EFFECTS: delete a dice calculation in session
     public void deleteDiceCalculation(int id) {
-        for (DiceCalculation d : diceCalculations) {
-            if (d.getId() == id) {
-                diceCalculations.remove(d);
-                break;
-            }
-        }
+        diceCalculations.removeIf(c -> c.getId() == id);
     }
 
-    // REQUIRES: dice roll with the given id is present in diceRolls
     // MODIFIES: this
     // EFFECTS: delete a dice roll in session
     public void deleteDiceRoll(int id) {
-        for (DiceRoll d : diceRolls) {
-            if (d.getId() == id) {
-                diceRolls.remove(d);
-                break;
-            }
-        }
+        diceRolls.removeIf(r -> r.getId() == id);
     }
 
-    // REQUIRES: session note with the given id is present in sessionNotes
     // MODIFIES: this
     // EFFECTS: delete a session note in session
     public void deleteSessionNote(int id) {
-        for (SessionNote s : sessionNotes) {
-            if (s.getId() == id) {
-                sessionNotes.remove(s);
-                break;
-            }
-        }
+        sessionNotes.removeIf(n -> n.getId() == id);
     }
 
-    // REQUIRES: additional note with the given id is present in additionalNotes
     // MODIFIES: this
     // EFFECTS: delete an additional note in session
     public void deleteAdditionalNote(int id) {
-        for (AdditionalNote a : additionalNotes) {
-            if (a.getId() == id) {
-                additionalNotes.remove(a);
-                break;
-            }
+        additionalNotes.removeIf(n -> n.getId() == id);
+    }
+
+    // EFFECTS: returns this session as a JSON object
+    public JSONObject toJsonObject() {
+        JSONObject sessionAsJson = new JSONObject();
+        sessionAsJson.put("id", this.id);
+        sessionAsJson.put("name", this.name);
+        sessionAsJson.put("characters", charactersToJsonArray());
+        sessionAsJson.put("diceCalculations", diceCalculationsToJsonArray());
+        sessionAsJson.put("diceRolls", diceRollsToJsonArray());
+        sessionAsJson.put("sessionNotes", sessionNotesToJsonArray());
+        sessionAsJson.put("additionalNotes", additionalNotesToJsonArray());
+        return sessionAsJson;
+    }
+
+    // EFFECTS: returns the list of characters as a JSON array
+    public JSONArray charactersToJsonArray() {
+        JSONArray charactersAsJson = new JSONArray();
+        for (Character character : characters) {
+            charactersAsJson.put(character.toJsonObject());
+        }
+        return charactersAsJson;
+    }
+
+    // EFFECTS: returns the list of dice calculations as a JSON array
+    public JSONArray diceCalculationsToJsonArray() {
+        JSONArray diceCalculationsAsJson = new JSONArray();
+        for (DiceCalculation diceCalculation : diceCalculations) {
+            diceCalculationsAsJson.put(diceCalculation.toJsonObject());
+        }
+        return diceCalculationsAsJson;
+    }
+
+    // EFFECTS: returns the list of dice rolls as a JSON array
+    public JSONArray diceRollsToJsonArray() {
+        JSONArray diceRollsAsJson = new JSONArray();
+        for (DiceRoll diceRoll : diceRolls) {
+            diceRollsAsJson.put(diceRoll.toJsonObject());
+        }
+        return diceRollsAsJson;
+    }
+
+    // EFFECTS: returns the list of session notes as a JSON array
+    public JSONArray sessionNotesToJsonArray() {
+        JSONArray sessionNotesAsJson = new JSONArray();
+        for (SessionNote sessionNote : sessionNotes) {
+            sessionNotesAsJson.put(sessionNote.toJsonObject());
+        }
+        return sessionNotesAsJson;
+    }
+
+    // EFFECTS: returns the list of additional notes as a JSON array
+    public JSONArray additionalNotesToJsonArray() {
+        JSONArray additionalNotesAsJson = new JSONArray();
+        for (AdditionalNote additionalNote : additionalNotes) {
+            additionalNotesAsJson.put(additionalNote.toJsonObject());
+        }
+        return additionalNotesAsJson;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the id of this session to the given value; if the given id is
+    // greater than or equal to the next id, the next id is assigned as id + 1.
+    public void setId(int id) {
+        this.id = id;
+        if (id >= nextId) {
+            nextId = id + 1;
         }
     }
 }

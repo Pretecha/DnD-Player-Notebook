@@ -7,25 +7,33 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
+import persistence.JsonWrite;
+import java.io.*;
+
 // the dnd player notebook application
 public class NotebookApp {
 
     private Hub mainHub;
     private Scanner scanner;
     private String stage;
+    private static final String DATA = "./data/storeddata.json";
+    private JsonWrite jsonWriter;
 
-    // EFFECTS: constructs a new NotebookApp with an empty hub, initializes the input
+    // EFFECTS: constructs a new NotebookApp with an empty hub, initializes the
+    // input
     // scanner, sets the stage to "hub", and starts running the application
     public NotebookApp() {
         mainHub = new Hub();
         scanner = new Scanner(System.in);
         stage = "hub";
+        jsonWriter = new JsonWrite(DATA);
         runApp();
     }
 
     // MODIFIES: this
     // EFFECTS: repeatedly displays the menu for the current stage and processes the
     // user's input, until the stage is set to "quit"
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void runApp() {
         while (!stage.equals("quit")) {
             switch (stage) {
@@ -58,6 +66,7 @@ public class NotebookApp {
                     System.out.println("3. Session Notes");
                     System.out.println("4. Additional Notes");
                     System.out.println("5. Back to Hub");
+                    System.out.println("6. Quit");
                     switch (readInt()) {
                         case 1:
                             sessionCharacters();
@@ -73,17 +82,33 @@ public class NotebookApp {
                             break;
                         case 5:
                             stage = "hub";
+                            mainHub.selectSession(0);
+                            break;
+                        case 6:
+                            stage = "quit";
                             break;
                     }
                     break;
+                case "quit":
+
             }
         }
+        try {
+            jsonWriter.open();
+            jsonWriter.save(mainHub);
+            jsonWriter.close();
+            System.out.println("App State Saved at " + DATA);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found at " + DATA);
+        }
+
     }
 
     // MODIFIES: this
     // EFFECTS: displays all sessions in the hub along with their characters, then
     // processes one user choice: select a session (sets stage to "session"), add a
     // new session, edit an existing session, remove a session, or return to the hub
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void viewSessions() {
         System.out.println("====== Sessions ======");
         for (Session s : mainHub.getSessions()) {
@@ -112,7 +137,7 @@ public class NotebookApp {
             case 2:
                 System.out.println("Please enter the name of the session");
                 String name = scanner.nextLine();
-                mainHub.addSession(name);
+                mainHub.addSession(new Session(name));
                 System.out.println("Session of name " + name + " has been added");
                 break;
             case 3:
@@ -144,10 +169,13 @@ public class NotebookApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: if no character exists in any session, displays a message and returns;
-    // otherwise displays every character across all sessions, then processes one user
-    // choice: select a character (sets stage to "session" and selects that character's
-    // session), or return to the hub
+    // EFFECTS: if no character exists in any session, displays a message and
+    // returns;
+    // otherwise displays every character across all sessions, then processes one
+    // user
+    // choice: select a character (sets stage to "session" and selects that
+    // character's session), or return to the hub
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void viewCharacters() {
         boolean haveCharacters = false;
         for (Session s : mainHub.getSessions()) {
@@ -186,9 +214,12 @@ public class NotebookApp {
 
     // MODIFIES: this
     // EFFECTS: if there are no pinned sessions, displays a message and returns;
-    // otherwise displays all pinned sessions and their characters, then processes one
-    // user choice: select a pinned session (sets stage to "session"), unpin a session,
+    // otherwise displays all pinned sessions and their characters, then processes
+    // one
+    // user choice: select a pinned session (sets stage to "session"), unpin a
+    // session,
     // or return to the hub
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void viewPinnedSessions() {
         if (mainHub.getPinnedSessionsId().size() < 1) {
             System.out.println("There is no existing pinned session");
@@ -242,9 +273,12 @@ public class NotebookApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts for a session id; if no session with that id exists, displays a
-    // message and returns; otherwise displays the session's details and processes one
+    // EFFECTS: prompts for a session id; if no session with that id exists,
+    // displays a
+    // message and returns; otherwise displays the session's details and processes
+    // one
     // user choice: edit its name, pin it, unpin it, or return to the hub
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void editSessions() {
         int id = readInt("Please enter the id of the session you wish to edit");
         Session session = mainHub.getSession(id);
@@ -293,9 +327,12 @@ public class NotebookApp {
 
     // REQUIRES: a session is currently selected in mainHub
     // MODIFIES: this
-    // EFFECTS: displays all characters in the current session, then processes one user
-    // choice: add a new character, edit an existing character, remove a character, or
+    // EFFECTS: displays all characters in the current session, then processes one
+    // user
+    // choice: add a new character, edit an existing character, remove a character,
+    // or
     // return to the session menu
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void sessionCharacters() {
         Session session = mainHub.getCurrentSession();
         System.out.println("===== Characters =====");
@@ -341,6 +378,7 @@ public class NotebookApp {
     // MODIFIES: c
     // EFFECTS: repeatedly displays c's fields and current stats, and lets the user
     // choose one field or stat to edit at a time, until the user chooses to be done
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void editCharacterFields(Character c) {
         boolean done = false;
         while (!done) {
@@ -433,10 +471,14 @@ public class NotebookApp {
 
     // REQUIRES: a session is currently selected in mainHub
     // MODIFIES: this
-    // EFFECTS: displays all dice rolls in the current session, then processes one user
-    // choice: roll new dice from entered dice notation and add the result, reroll an
-    // existing dice roll (adding a new dice roll with the same dice and a new result),
+    // EFFECTS: displays all dice rolls in the current session, then processes one
+    // user
+    // choice: roll new dice from entered dice notation and add the result, reroll
+    // an
+    // existing dice roll (adding a new dice roll with the same dice and a new
+    // result),
     // remove a dice roll, or return to the dice menu
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void sessionDiceRolls() {
         Session session = mainHub.getCurrentSession();
         System.out.println("===== Dice Rolls =====");
@@ -501,10 +543,13 @@ public class NotebookApp {
 
     // REQUIRES: a session is currently selected in mainHub
     // MODIFIES: this
-    // EFFECTS: displays all dice calculations in the current session, then processes
-    // one user choice: add a new dice calculation from entered dice notation, update an
+    // EFFECTS: displays all dice calculations in the current session, then
+    // processes
+    // one user choice: add a new dice calculation from entered dice notation,
+    // update an
     // existing dice calculation's dice from entered dice notation, remove a dice
     // calculation, or return to the dice menu
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void sessionDiceCalculations() {
         Session session = mainHub.getCurrentSession();
         System.out.println("===== Dice Calculations =====");
@@ -518,7 +563,7 @@ public class NotebookApp {
         System.out.println("4. Back to Dice");
         switch (readInt()) {
             case 1:
-                System.out.println("Please enter the label of the calculation");
+                System.out.println("Please enter the name of the calculation");
                 String name = scanner.nextLine();
                 System.out.println("Please enter dice notation (e.g. 2d6 + 1d8 + 15)");
                 Map<Integer, Integer> parsedCalc = parseDiceString(scanner.nextLine());
@@ -541,15 +586,26 @@ public class NotebookApp {
                     System.out.println("Dice calculation with given id does not exist");
                 } else {
                     System.out.println(calc.getId() + " " + calc.getName() + ": " + formatDice(calc.getDice()));
-                    System.out.println("Please enter dice notation to update (e.g. 2d6 + 1d8 + 15)");
-                    Map<Integer, Integer> parsedEdit = parseDiceString(scanner.nextLine());
-                    if (parsedEdit == null) {
-                        System.out.println("Invalid dice notation. Calculation not changed.");
-                    } else {
-                        for (Map.Entry<Integer, Integer> e : parsedEdit.entrySet()) {
-                            calc.setDice(e.getKey(), e.getValue());
-                        }
-                        System.out.println("Dice calculation has been updated");
+                    System.out.println("Please select the option you wish to edit:");
+                    System.out.println("1. Add Dice Calculation");
+                    System.out.println("2. Edit Dice Calculation");
+                    switch (readInt()) {
+                        case 1:
+                            System.out.println("Please enter new name");
+                            calc.setName(scanner.nextLine());
+                            break;
+                        case 2:
+                            System.out.println("Please enter dice notation to update (e.g. 2d6 + 1d8 + 15)");
+                            Map<Integer, Integer> parsedEdit = parseDiceString(scanner.nextLine());
+                            if (parsedEdit == null) {
+                                System.out.println("Invalid dice notation. Calculation not changed.");
+                            } else {
+                                for (Map.Entry<Integer, Integer> e : parsedEdit.entrySet()) {
+                                    calc.setDice(e.getKey(), e.getValue());
+                                }
+                                System.out.println("Dice calculation has been updated");
+                            }
+                            break;
                     }
                 }
                 break;
@@ -567,9 +623,11 @@ public class NotebookApp {
         }
     }
 
-    // EFFECTS: parses a dice notation string (e.g. "2d6 + 1d8 + 15") into a map of die
-    // sides to count; a term with no "d" is treated as a flat constant, encoded as that
-    // many 1-sided dice; returns null if any term is not valid dice notation
+    // EFFECTS: parses a dice notation string (e.g. "2d6 + 1d8 + 15") into a map of
+    // die
+    // sides to count; a term with no "d" is treated as a flat constant, encoded as
+    // that many 1-sided dice; returns null if any term is not valid dice notation
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     private Map<Integer, Integer> parseDiceString(String input) {
         Map<Integer, Integer> dice = new HashMap<>();
         for (String rawTerm : input.split("\\+")) {
@@ -628,10 +686,14 @@ public class NotebookApp {
 
     // REQUIRES: a session is currently selected in mainHub
     // MODIFIES: this
-    // EFFECTS: displays all session notes in the current session, then processes one
-    // user choice: add a new session note, edit an existing session note's title, edit
-    // an existing session note's text, remove a session note, or return to the session
+    // EFFECTS: displays all session notes in the current session, then processes
+    // one
+    // user choice: add a new session note, edit an existing session note's title,
+    // edit
+    // an existing session note's text, remove a session note, or return to the
+    // session
     // menu
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void sessionNotes() {
         Session session = mainHub.getCurrentSession();
         System.out.println("===== Session Notes =====");
@@ -692,10 +754,12 @@ public class NotebookApp {
 
     // REQUIRES: a session is currently selected in mainHub
     // MODIFIES: this
-    // EFFECTS: displays all additional notes in the current session, then processes one
-    // user choice: add a new additional note, edit an existing additional note's title,
-    // edit an existing additional note's text, remove an additional note, or return to
-    // the session menu
+    // EFFECTS: displays all additional notes in the current session, then processes
+    // one
+    // user choice: add a new additional note, edit an existing additional note's
+    // title, edit an existing additional note's text, remove an additional note, or
+    // return to the session menu
+    @SuppressWarnings("methodlength") // ta Marcus said this was ok
     public void sessionAdditionalNotes() {
         Session session = mainHub.getCurrentSession();
         System.out.println("===== Additional Notes =====");

@@ -60,7 +60,7 @@ class HubTest {
         Session s2 = new Session("Test 2");
         hub.addSession(s2);
         hub.deleteSession(session.getId());
-        assertTrue(hub.getSessions().isEmpty());
+        assertFalse(hub.getSessions().isEmpty());
         assertNull(hub.getSession(session.getId()));
     }
 
