@@ -1,0 +1,61 @@
+{
+    "sessions": [{
+        "id": 1,
+        "name": "Lab",
+        "characters": [{
+            "id": 1,
+            "name": "TestSubject",
+            "levelAndClass": "Lv 6 Peace Cleric",
+            "race": "Autognome",
+            "alignment": "Chaotic Good",
+            "background": "Hermit",
+            "str": 8,
+            "con": 14,
+            "dex": 14,
+            "cha": 12,
+            "intel": 10,
+            "wis": 17,
+            "sessionId": 1
+        }],
+        "diceCalculations": [{
+            "id": 1,
+            "name": "Beacon of Hope + Aura of Vitality + Healing Word + 2 Goodberries each",
+            "dice": [
+                { "sides": 6, "count": 2 },
+                { "sides": 4, "count": 1 },
+                { "sides": 1, "count": 7 }
+            ],
+            "sessionId": 1
+        }],
+        "diceRolls": [{
+            "id": 1,
+            "dice": [
+                { "sides": 20, "count": 1 }
+            ],
+            "result": 17,
+            "sessionId": 1
+        },
+        {
+            "id": 2,
+            "dice": [
+                { "sides": 6, "count": 2 }
+            ],
+            "result": 10,
+            "sessionId": 1
+        }],
+        "sessionNotes": [{
+            "id": 1,
+            "title": "Experiment 0",
+            "text": "Rolled our stats, decided class race and background. Background of compaign is a continent/planet taken over by evil scientists, we are test subjects. Encountered a minion, won in 2 turns, no damage taken, no resources used.",
+            "sessionId": 1
+        }],
+        "additionalNotes": [{
+            "id": 1,
+            "title": "Backstory",
+            "text": "Autognomes are creations of ancient artificers. I was created at some point, but I have no memory. Since I have gained consciousness, I have not met my creator. Through years of learning from left over literature in the lab, I learned of the world around me. One day, upon reading the remnants of a scroll, a jolt of energy shot through me, and I encountered a magnificent figure, one I could only describe as \"holy\". This figure chose me for some unknown reasons, and I became a peace cleric. What I haven't realized at this point, was that I had gained something most Autognomes dream of (if they can dream): emotions.",
+            "sessionId": 1
+        }],
+        "notThisField": "shouldn't exist, just checking parser ignores unknowns"
+    }],
+    "pinnedSessions": [1]
+}
