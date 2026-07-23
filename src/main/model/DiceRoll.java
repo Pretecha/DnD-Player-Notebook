@@ -77,6 +77,11 @@ public class DiceRoll {
         return result;
     }
 
+    // EFFECTS: sets result to given value
+    public void setResult(int result) {
+        this.result = result;
+    }
+
     // EFFECTS: returns the session id of the session this dice roll belongs to
     public int getSessionId() {
         return sessionId;

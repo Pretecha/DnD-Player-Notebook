@@ -89,4 +89,10 @@ class DiceRollTest {
         DiceRoll r3 = new DiceRoll(1, 1, 0, 0, 0, 0);
         assertEquals(id + 2, r3.getId());
     }
+
+    @Test
+    void testSetResult() {
+        diceRoll.setResult(1);
+        assertEquals(1, diceRoll.getResult());
+    }
 }

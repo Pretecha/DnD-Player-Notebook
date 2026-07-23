@@ -169,7 +169,7 @@ class HubTest {
     }
 
     @Test
-    void testNoIdSelectCharacter(){
+    void testNoIdSelectCharacter() {
         Character c = new Character("Test");
         session.addCharacter(c);
         hub.selectSessionWithCharacter(-1);
