@@ -32,8 +32,8 @@ class JsonWriteTest {
             writer.open();
             writer.save(hub);
             writer.close();
-
-            JsonRead reader = new JsonRead("./data/testWriterEmptyHub.json");
+            
+            JsonRead reader = new JsonRead("./data/testWriteEmptyHub.json");
             Hub readHub = reader.read();
             assertTrue(readHub.getSessions().isEmpty());
             assertTrue(readHub.getPinnedSessionsId().isEmpty());
