@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +59,8 @@ public class JsonRead {
         String name = jsonObject.getString("name");
         Session session = new Session(name);
         session.setId(jsonObject.getInt("id"));
+        session.setTimeCreated(LocalDateTime.parse(jsonObject.getString("timeCreated")));
+        session.setTimeLastOpened(LocalDateTime.parse(jsonObject.getString("timeLastOpened")));
         addCharacters(session, jsonObject);
         addDiceCalculations(session, jsonObject);
         addDiceRolls(session, jsonObject);

@@ -18,6 +18,8 @@
             }],
             "name": "Test",
             "id": 1,
+            "timeCreated": "2026-06-01T20:00:00",
+            "timeLastOpened": "2026-08-01T20:00:00",
             "diceCalculations": [{
                 "name": "Expertise Advantage Initiative",
                 "dice": [

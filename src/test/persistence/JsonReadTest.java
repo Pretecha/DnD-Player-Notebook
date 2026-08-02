@@ -9,6 +9,7 @@ import model.Session;
 import model.SessionNote;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +53,8 @@ class JsonReadTest {
             Session session = hub.getSessions().get(0);
             assertEquals(1, session.getId());
             assertEquals("Lab", session.getName());
+            assertEquals(LocalDateTime.parse("2026-06-01T20:00:00"), session.getTimeCreated());
+            assertEquals(LocalDateTime.parse("2026-08-01T20:00:00"), session.getTimeLastOpened());
 
             assertEquals(1, session.getCharacters().size());
             Character character = session.getCharacters().get(0);

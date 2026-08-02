@@ -2,6 +2,8 @@
     "sessions": [{
         "id": 1,
         "name": "Lab",
+        "timeCreated": "2026-06-01T20:00:00",
+        "timeLastOpened": "2026-08-01T20:00:00",
         "characters": [{
             "id": 1,
             "name": "TestSubject",

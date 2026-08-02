@@ -2,6 +2,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.json.JSONArray;
@@ -29,6 +31,9 @@ class SessionTest {
     @Test
     void testConstructor() {
         assertEquals("Test", session.getName());
+        assertNotNull(session.getTimeCreated());
+        assertNotNull(session.getTimeLastOpened());
+        assertTrue(session.getTimeCreated().isBefore(LocalDateTime.now()));
         assertTrue(session.getCharacters().isEmpty());
         assertTrue(session.getDiceCalculations().isEmpty());
         assertTrue(session.getDiceRolls().isEmpty());
@@ -203,10 +208,19 @@ class SessionTest {
     }
 
     @Test
+    void testMarkOpened() {
+        LocalDateTime beforeTime = session.getTimeLastOpened();
+        session.markOpened();
+        assertFalse(session.getTimeLastOpened().isBefore(beforeTime));
+    }
+
+    @Test
     void testSessionJson() {
         JSONObject sessionJson = session.toJsonObject();
         assertEquals(session.getId(), sessionJson.getInt("id"));
         assertEquals(session.getName(), sessionJson.getString("name"));
+        assertEquals(session.getTimeCreated().toString(), sessionJson.getString("timeCreated"));
+        assertEquals(session.getTimeLastOpened().toString(), sessionJson.getString("timeLastOpened"));
     }
 
     @Test

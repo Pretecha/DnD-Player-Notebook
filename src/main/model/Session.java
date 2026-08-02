@@ -6,6 +6,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+
 // Represent a session with a list of characters, dice calculations, dice rolls,
 // session notes, and additional notes
 public class Session {
@@ -14,6 +16,8 @@ public class Session {
 
     private int id;
     private String name;
+    private LocalDateTime timeCreated;
+    private LocalDateTime timeLastOpened;
     private List<Character> characters;
     private List<DiceCalculation> diceCalculations;
     private List<DiceRoll> diceRolls;
@@ -26,6 +30,8 @@ public class Session {
         this.id = nextId;
         nextId++;
         this.name = name;
+        this.timeCreated = LocalDateTime.now();
+        this.timeLastOpened = LocalDateTime.now();
         this.characters = new ArrayList<>();
         this.diceCalculations = new ArrayList<>();
         this.diceRolls = new ArrayList<>();
@@ -196,11 +202,41 @@ public class Session {
         additionalNotes.removeIf(n -> n.getId() == id);
     }
 
+    // EFFECTS: returns the time this session was created
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
+
+    // EFFECTS: returns the time this session was last opened
+    public LocalDateTime getTimeLastOpened() {
+        return timeLastOpened;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the time this session was last opened to now
+    public void markOpened() {
+        timeLastOpened = LocalDateTime.now();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the time this session was created (for reading)
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the time this session was last opened (for reading)
+    public void setTimeLastOpened(LocalDateTime timeLastOpened) {
+        this.timeLastOpened = timeLastOpened;
+    }
+
     // EFFECTS: returns this session as a JSON object
     public JSONObject toJsonObject() {
         JSONObject sessionAsJson = new JSONObject();
         sessionAsJson.put("id", this.id);
         sessionAsJson.put("name", this.name);
+        sessionAsJson.put("timeCreated", this.timeCreated.toString());
+        sessionAsJson.put("timeLastOpened", this.timeLastOpened.toString());
         sessionAsJson.put("characters", charactersToJsonArray());
         sessionAsJson.put("diceCalculations", diceCalculationsToJsonArray());
         sessionAsJson.put("diceRolls", diceRollsToJsonArray());
