@@ -1,0 +1,53 @@
+{
+    "sessions": [
+        {
+            "characters": [{
+                "wis": 17,
+                "con": 14,
+                "levelAndClass": "Lv 6 Peace Cleric",
+                "race": "Autognome",
+                "sessionId": 1,
+                "intel": 10,
+                "str": 8,
+                "background": "Hermit",
+                "dex": 14,
+                "name": "TestSubject",
+                "id": 1,
+                "alignment": "Chaotic Good",
+                "cha": 12
+            }],
+            "name": "Test",
+            "id": 1,
+        "timeCreated": "2026-06-01T20:00:00",
+        "timeLastOpened": "2026-08-01T20:00:00",
+            "diceCalculations": [{
+                "name": "Expertise Advantage Initiative",
+                "dice": [
+                    {
+                        "count": 14,
+                        "sides": 1
+                    },
+                    {
+                        "count": 2,
+                        "sides": 20
+                    }
+                ],
+                "id": 1,
+                "sessionId": 1
+            }],
+            "sessionNotes": [],
+            "additionalNotes": [],
+            "diceRolls": []
+        },
+        {
+            "characters": [],
+            "name": "Test 2",
+            "id": 4,
+            "diceCalculations": [],
+            "sessionNotes": [],
+            "additionalNotes": [],
+            "diceRolls": []
+        }
+    ],
+    "pinnedSessions": []
+}

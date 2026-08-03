@@ -16,38 +16,106 @@
                 "alignment": "Chaotic Good",
                 "cha": 12
             }],
-            "name": "Test",
+            "timeLastOpened": "2026-08-01T20:00",
+            "name": "Lab",
+            "timeCreated": "2026-06-01T20:00",
             "id": 1,
-            "timeCreated": "2026-06-01T20:00:00",
-            "timeLastOpened": "2026-08-01T20:00:00",
             "diceCalculations": [{
-                "name": "Expertise Advantage Initiative",
+                "name": "Beacon of Hope + Aura of Vitality + Healing Word + 2 Goodberries each",
                 "dice": [
                     {
-                        "count": 14,
+                        "count": 7,
                         "sides": 1
                     },
                     {
+                        "count": 1,
+                        "sides": 4
+                    },
+                    {
                         "count": 2,
-                        "sides": 20
+                        "sides": 6
                     }
                 ],
                 "id": 1,
                 "sessionId": 1
             }],
+            "sessionNotes": [{
+                "id": 1,
+                "text": "Rolled our stats, decided class race and background. Background of compaign is a continent/planet taken over by evil scientists, we are test subjects. Encountered a minion, won in 2 turns, no damage taken, no resources used.",
+                "sessionId": 1,
+                "title": "Experiment 0"
+            }],
+            "additionalNotes": [{
+                "id": 1,
+                "text": "Autognomes are creations of ancient artificers. I was created at some point, but I have no memory. Since I have gained consciousness, I have not met my creator. Through years of learning from left over literature in the lab, I learned of the world around me. One day, upon reading the remnants of a scroll, a jolt of energy shot through me, and I encountered a magnificent figure, one I could only describe as \"holy\". This figure chose me for some unknown reasons, and I became a peace cleric. What I haven't realized at this point, was that I had gained something most Autognomes dream of (if they can dream): emotions.",
+                "sessionId": 1,
+                "title": "Backstory"
+            }],
+            "diceRolls": [
+                {
+                    "result": 17,
+                    "dice": [{
+                        "count": 1,
+                        "sides": 20
+                    }],
+                    "id": 1,
+                    "sessionId": 1
+                },
+                {
+                    "result": 10,
+                    "dice": [{
+                        "count": 2,
+                        "sides": 6
+                    }],
+                    "id": 2,
+                    "sessionId": 1
+                }
+            ]
+        },
+        {
+            "characters": [],
+            "timeLastOpened": "2026-08-03T12:34:27.556458",
+            "name": "hi",
+            "timeCreated": "2026-08-03T12:24:29.859101",
+            "id": 2,
+            "diceCalculations": [],
             "sessionNotes": [],
             "additionalNotes": [],
             "diceRolls": []
         },
         {
             "characters": [],
-            "name": "Test 2",
+            "timeLastOpened": "2026-08-03T14:22:58.952546",
+            "name": "new",
+            "timeCreated": "2026-08-03T14:22:58.952360",
+            "id": 3,
+            "diceCalculations": [],
+            "sessionNotes": [],
+            "additionalNotes": [],
+            "diceRolls": []
+        },
+        {
+            "characters": [],
+            "timeLastOpened": "2026-08-03T14:23:01.214702",
+            "name": "new2",
+            "timeCreated": "2026-08-03T14:23:01.214648",
             "id": 4,
+            "diceCalculations": [],
+            "sessionNotes": [],
+            "additionalNotes": [],
+            "diceRolls": []
+        },
+        {
+            "characters": [],
+            "timeLastOpened": "2026-08-03T14:23:03.012056",
+            "name": "new3",
+            "timeCreated": "2026-08-03T14:23:03.012023",
+            "id": 5,
             "diceCalculations": [],
             "sessionNotes": [],
             "additionalNotes": [],
             "diceRolls": []
         }
     ],
-    "pinnedSessions": []
+    "pinnedSessions": [1]
 }
