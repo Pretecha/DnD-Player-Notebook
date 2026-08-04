@@ -1,11 +1,6 @@
 package ui;
 
 import model.*;
-import model.Character;
-
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
 
 import persistence.JsonRead;
 import persistence.JsonWrite;
@@ -14,7 +9,6 @@ import java.io.*;
 import javax.swing.*;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,6 +68,9 @@ public class NotebookFrame extends JFrame implements ActionListener {
                 hubPanel.refresh();
             }
         } catch (IOException e) {
+            if (mainHub == null) {
+                mainHub = new Hub();
+            }
             JOptionPane.showMessageDialog(this, "Unable to read file from " + DATA, "Read Error",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -179,5 +176,6 @@ public class NotebookFrame extends JFrame implements ActionListener {
     // EFFECTS: sets the current panel to hub
     public void showHub() {
         panelManager.show(panelCollection, HUB_STATE);
+        hubPanel.refresh();
     }
 }

@@ -73,8 +73,22 @@
             ]
         },
         {
-            "characters": [],
-            "timeLastOpened": "2026-08-03T20:15:42.391634",
+            "characters": [{
+                "wis": 0,
+                "con": 0,
+                "levelAndClass": "",
+                "race": "",
+                "sessionId": 6,
+                "intel": 0,
+                "str": 0,
+                "background": "",
+                "dex": 0,
+                "name": "another character",
+                "id": 6,
+                "alignment": "",
+                "cha": 0
+            }],
+            "timeLastOpened": "2026-08-04T00:54:00.615608",
             "name": "Another Adventure",
             "timeCreated": "2026-08-03T20:03:58.887735",
             "id": 6,
@@ -84,9 +98,55 @@
             "diceRolls": []
         },
         {
-            "characters": [],
-            "timeLastOpened": "2026-08-03T23:02:31.878534",
-            "name": "Loooooooooooooooooog ass name",
+            "characters": [
+                {
+                    "wis": 0,
+                    "con": 0,
+                    "levelAndClass": "awdwadwda",
+                    "race": "",
+                    "sessionId": 7,
+                    "intel": 0,
+                    "str": 0,
+                    "background": "",
+                    "dex": 4,
+                    "name": "old",
+                    "id": 3,
+                    "alignment": "awdwdawd",
+                    "cha": 0
+                },
+                {
+                    "wis": 0,
+                    "con": 0,
+                    "levelAndClass": "",
+                    "race": "",
+                    "sessionId": 7,
+                    "intel": 0,
+                    "str": 0,
+                    "background": "",
+                    "dex": 0,
+                    "name": "new",
+                    "id": 4,
+                    "alignment": "",
+                    "cha": 0
+                },
+                {
+                    "wis": 0,
+                    "con": 0,
+                    "levelAndClass": "",
+                    "race": "",
+                    "sessionId": 7,
+                    "intel": 0,
+                    "str": 0,
+                    "background": "",
+                    "dex": 0,
+                    "name": "new2",
+                    "id": 5,
+                    "alignment": "",
+                    "cha": 0
+                }
+            ],
+            "timeLastOpened": "2026-08-04T01:15:42.471690",
+            "name": "smth normal",
             "timeCreated": "2026-08-03T20:04:16.603614",
             "id": 7,
             "diceCalculations": [],

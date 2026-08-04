@@ -226,26 +226,24 @@ public class HubPanel extends JPanel implements ActionListener {
     private void refreshCharacters() {
         charactersPanel.removeAll();
         for (Session session : mainHub.getSessions()) {
-            for (Character character : session.getCharacters()) {
-                charactersPanel.add(buildCharacterButton(character));
-                charactersPanel.add(Box.createRigidArea(new Dimension(0, 8)));
+            if (mainHub.getPinnedSessionsId().contains(session.getId())) {
+                addCharacterButtons(session);
+            }
+        }
+        if (!mainHub.getPinnedSessionsId().isEmpty()) {
+            JLabel divider = new JLabel("— Other Sessions —", JLabel.CENTER);
+            divider.setFont(new Font(divider.getFont().getName(), Font.PLAIN, 13));
+            divider.setAlignmentX(CENTER_ALIGNMENT);
+            charactersPanel.add(divider);
+            charactersPanel.add(Box.createRigidArea(new Dimension(0, 8)));
+        }
+        for (Session session : mainHub.getSessions()) {
+            if (!mainHub.getPinnedSessionsId().contains(session.getId())) {
+                addCharacterButtons(session);
             }
         }
         charactersPanel.revalidate();
         charactersPanel.repaint();
-    }
-
-    // EFFECTS: format a button
-    private JButton formatButton(JButton button, String actionCommand) {
-        button.setAlignmentX(CENTER_ALIGNMENT);
-        button.setHorizontalAlignment(SwingConstants.LEFT);
-        button.setActionCommand(actionCommand);
-        button.addActionListener(this);
-
-        Dimension preferred = button.getPreferredSize();
-        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, preferred.height));
-        button.setPreferredSize(new Dimension(0, preferred.height));
-        return button;
     }
 
     // EFFECTS: build a session button
@@ -265,6 +263,15 @@ public class HubPanel extends JPanel implements ActionListener {
                 + "Created: " + session.getTimeCreated().format(TIME_FORMAT) + "<br>"
                 + "Last opened: " + session.getTimeLastOpened().format(TIME_FORMAT) + "<br>"
                 + session.getCharacters().size() + " characters</div></html>";
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds a character button for every character in the given session
+    private void addCharacterButtons(Session session) {
+        for (Character character : session.getCharacters()) {
+            charactersPanel.add(buildCharacterButton(character));
+            charactersPanel.add(Box.createRigidArea(new Dimension(0, 8)));
+        }
     }
 
     // EFFECTS: build a character button
@@ -288,10 +295,24 @@ public class HubPanel extends JPanel implements ActionListener {
                 + "Session last opened: " + session.getTimeLastOpened().format(TIME_FORMAT) + "</div></html>";
     }
 
+    // EFFECTS: format a button
+    private JButton formatButton(JButton button, String actionCommand) {
+        button.setAlignmentX(CENTER_ALIGNMENT);
+        button.setHorizontalAlignment(SwingConstants.LEFT);
+        button.setActionCommand(actionCommand);
+        button.addActionListener(this);
+
+        Dimension preferred = button.getPreferredSize();
+        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, preferred.height));
+        button.setPreferredSize(new Dimension(0, preferred.height));
+        return button;
+    }
+
     // MODIFIES: this, frame, mainHub
     // EFFECTS: deals with button clicks; adds a new session using the text field's
     // contents; opens the session carried by session buttons; opens the session
     // that the character button belongs to
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         String name;
