@@ -49,3 +49,12 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 
 - As a user, I want to be able to save the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, to file automatically closing the application, and also be able to manually save whenever I choose to.
 - As a user, I want to be able to load the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, in the exact state that I left it as, from file automatically, and also be able to manually load whenever I choose to.
+
+# Instructions for End User
+
+- You can view the panel that displays the Sessions that have already been added to the Hub by launching the application. The Hub panel displays three columns, with every session listed in the middle "Sessions" column.
+- You can generate the first required action related to the user story "adding multiple Sessions to a Hub" by typing a session name into the text field at the bottom of the Sessions column and clicking the "add" button.
+- You can generate the second required action related to the user story "adding multiple Sessions to a Hub" by right-clicking any session card and selecting "Pin". Pinned sessions are then shown as a filtered subset in the "Pinned Sessions" column, and their characters are listed first in the "Characters" column. Right-clicking also offers "Rename" and "Delete".
+- You can locate my visual component by looking at the top of the Hub screen. There is an image displayed as the title.
+- You can save the state of my application by selecting File > Save from the menu bar. The application also saves automatically when the window is closed, and a few seconds after any edit.
+- You can reload the state of my application by selecting File > Load from the menu bar. The application also loads automatically on startup.
