@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
@@ -16,10 +17,13 @@ import java.util.Random;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -37,6 +41,10 @@ public class HubPanel extends JPanel implements ActionListener {
     private static final String ADD_SESSION = "addSession";
     private static final String OPEN_SESSION_WITH_SESSION = "openSessionWithSession";
     private static final String OPEN_SESSION_WITH_CHARACTER = "openSessionWithCharacter";
+    private static final String RENAME_SESSION = "renameSession";
+    private static final String PIN_SESSION = "pinSession";
+    private static final String UNPIN_SESSION = "unpinSession";
+    private static final String DELETE_SESSION = "deleteSession";
 
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("M/d/yy, E, h:mm a",
             Locale.ENGLISH);
@@ -52,6 +60,8 @@ public class HubPanel extends JPanel implements ActionListener {
 
     private Map<JButton, Session> sessionButtons = new HashMap<>();
     private Map<JButton, Character> characterButtons = new HashMap<>();
+
+    private Map<JMenuItem, Session> rightClickMenuItem = new HashMap<>();
 
     // EFFECTS: constructs this panel and initialize all neccessary info; set its
     // innerpanels
@@ -78,8 +88,9 @@ public class HubPanel extends JPanel implements ActionListener {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(15, 0, 15, 0));
 
-        JLabel title = new JLabel("D&D Notebook", JLabel.CENTER);
-        title.setFont(new Font(title.getFont().getName(), Font.BOLD, 28));
+        ImageIcon raw = new ImageIcon("./data/banner.png");
+        Image scaled = raw.getImage().getScaledInstance(300, -1, Image.SCALE_SMOOTH);
+        JLabel title = new JLabel(new ImageIcon(scaled));
         title.setAlignmentX(CENTER_ALIGNMENT);
 
         JLabel subtitle = new JLabel(randomSubtitle(), JLabel.CENTER);
@@ -131,7 +142,7 @@ public class HubPanel extends JPanel implements ActionListener {
         label.setBorder(new EmptyBorder(0, 4, 8, 0));
         column.add(label, BorderLayout.NORTH);
 
-        JScrollPane scroll = wrapInScroll(panel);
+        JScrollPane scroll = frame.wrapInScroll(panel);
         scroll.setBorder(null);
         scroll.setOpaque(false);
         scroll.getViewport().setOpaque(false);
@@ -152,10 +163,13 @@ public class HubPanel extends JPanel implements ActionListener {
 
         JPanel addPanel = new JPanel(new BorderLayout(8, 0));
         addPanel.setOpaque(false);
+
         newSessionField = new JTextField();
+
         JButton addButton = new RoundedButton("add", Palette.BUTTON, Palette.BUTTON_HOVER);
         addButton.setActionCommand(ADD_SESSION);
         addButton.addActionListener(this);
+
         addPanel.add(newSessionField, BorderLayout.CENTER);
         addPanel.add(addButton, BorderLayout.EAST);
         panel.add(addPanel, BorderLayout.SOUTH);
@@ -168,23 +182,13 @@ public class HubPanel extends JPanel implements ActionListener {
         return buildColumn("Characters", charactersPanel);
     }
 
-    // EFFECTS: formats the given panel vertically and wraps it in a scroll
-    // pane that scrolls vertically but never horizontally
-    private JScrollPane wrapInScroll(JPanel panel) {
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        return scrollPane;
-    }
-
     // MODIFIES: this
     // EFFECTS: refresh all panels within this panel
     public void refresh() {
         mainHub = frame.getMainHub();
         sessionButtons.clear();
         characterButtons.clear();
+        rightClickMenuItem.clear();
         refreshPinned();
         refreshSessions();
         refreshCharacters();
@@ -249,6 +253,7 @@ public class HubPanel extends JPanel implements ActionListener {
         JButton button = formatButton(
                 new RoundedButton(sessionButtonText(session), Palette.BUTTON, Palette.BUTTON_HOVER),
                 OPEN_SESSION_WITH_SESSION);
+        button.addMouseListener(new RightClickListener(buildSessionMenu(session)));
         sessionButtons.put(button, session);
         return button;
     }
@@ -256,7 +261,7 @@ public class HubPanel extends JPanel implements ActionListener {
     // EFFECTS: returns the HTML-formatted label text for a session button,
     // including name, timeCreated, timeLastOpened, and character count
     private String sessionButtonText(Session session) {
-        return "<html><div style='padding: 4px 8px; width: 200px; '><b>" + session.getName() + "</b><br>"
+        return "<html><div style='padding: 4px 8px; width: 250px; '><b>" + session.getName() + "</b><br>"
                 + "Created: " + session.getTimeCreated().format(TIME_FORMAT) + "<br>"
                 + "Last opened: " + session.getTimeLastOpened().format(TIME_FORMAT) + "<br>"
                 + session.getCharacters().size() + " characters</div></html>";
@@ -276,7 +281,7 @@ public class HubPanel extends JPanel implements ActionListener {
     // session's timeLastOpened
     private String characterButtonText(Character character) {
         Session session = mainHub.getSession(character.getSessionId());
-        return "<html><div style='padding: 4px 8px; width: 200px; '><b>" + character.getName() + "</b><br>"
+        return "<html><div style='padding: 4px 8px; width: 250px; '><b>" + character.getName() + "</b><br>"
                 + character.getLevelAndClass() + "<br>"
                 + "Session name: " + session.getName() + "<br>"
                 + "Session created: " + session.getTimeCreated().format(TIME_FORMAT) + "<br>"
@@ -289,9 +294,19 @@ public class HubPanel extends JPanel implements ActionListener {
     // that the character button belongs to
     @Override
     public void actionPerformed(ActionEvent e) {
+        String name;
+        Session session;
+        frame.notifyInputChanged();
         switch (e.getActionCommand()) {
             case ADD_SESSION:
-                addSession();
+                name = newSessionField.getText().trim();
+                if (name.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Please enter a session name.");
+                    return;
+                }
+                mainHub.addSession(new Session(name));
+                newSessionField.setText("");
+                refresh();
                 break;
             case OPEN_SESSION_WITH_SESSION:
                 frame.showSession(sessionButtons.get(e.getSource()));
@@ -299,22 +314,65 @@ public class HubPanel extends JPanel implements ActionListener {
             case OPEN_SESSION_WITH_CHARACTER:
                 frame.showSession(mainHub.getSession(characterButtons.get(e.getSource()).getSessionId()));
                 break;
+            case RENAME_SESSION:
+                session = rightClickMenuItem.get(e.getSource());
+                name = JOptionPane.showInputDialog(this, "New name:", session.getName(), JOptionPane.PLAIN_MESSAGE);
+                if (name != null && !name.trim().isEmpty()) {
+                    session.setName(name.trim());
+                    refresh();
+                }
+                break;
+            case PIN_SESSION:
+                mainHub.pinSession(rightClickMenuItem.get(e.getSource()).getId());
+                refresh();
+                break;
+            case UNPIN_SESSION:
+                mainHub.unpinSession(rightClickMenuItem.get(e.getSource()).getId());
+                refresh();
+                break;
+            case DELETE_SESSION:
+                session = rightClickMenuItem.get(e.getSource());
+                int choice = JOptionPane.showConfirmDialog(this,
+                        "Delete \"" + session.getName() + "\"?", "Delete Session",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (choice == JOptionPane.YES_OPTION) {
+                    if (mainHub.getPinnedSessionsId().contains(session.getId())) {
+                        mainHub.unpinSession(session.getId());
+                    }
+                    mainHub.deleteSession(session.getId());
+                    refresh();
+                }
+                break;
             default:
                 break;
         }
     }
 
-    // MODIFIES: mainHub
-    // EFFECTS: adds a new session using the name typed into the text field,
-    // if it is not blank, then refreshes the sessions column
-    private void addSession() {
-        String name = newSessionField.getText().trim();
-        if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a session name.");
-            return;
+    // EFFECTS: builds the right-click menu for the given session, with rename,
+    // pin or unpin (depending on the session's current state), and delete
+    private JPopupMenu buildSessionMenu(Session session) {
+        JPopupMenu menu = new JPopupMenu();
+
+        menu.add(buildMenuItem("Rename", RENAME_SESSION, session));
+
+        if (mainHub.getPinnedSessionsId().contains(session.getId())) {
+            menu.add(buildMenuItem("Unpin", UNPIN_SESSION, session));
+        } else {
+            menu.add(buildMenuItem("Pin", PIN_SESSION, session));
         }
-        mainHub.addSession(new Session(name));
-        newSessionField.setText("");
-        refreshSessions();
+
+        menu.add(buildMenuItem("Delete", DELETE_SESSION, session));
+
+        return menu;
+    }
+
+    // EFFECTS: builds one menu item with the given name and action command,
+    // carrying the given session so the action knows which one to act on
+    private JMenuItem buildMenuItem(String name, String actionCommand, Session session) {
+        JMenuItem item = new JMenuItem(name);
+        item.setActionCommand(actionCommand);
+        item.addActionListener(this);
+        rightClickMenuItem.put(item, session);
+        return item;
     }
 }

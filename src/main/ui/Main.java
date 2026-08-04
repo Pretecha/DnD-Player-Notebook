@@ -45,6 +45,11 @@ public class Main {
             UIManager.put("OptionPane.background", Palette.BACKGROUND);
             UIManager.put("OptionPane.messageForeground", Palette.TEXT);
 
+            UIManager.put("Button.background", Palette.BUTTON);
+            UIManager.put("Button.foreground", Palette.TEXT);
+            UIManager.put("Button.select", Palette.BUTTON_HOVER);
+            UIManager.put("Button.focus", Palette.BACKGROUND);
+
             new NotebookFrame();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");

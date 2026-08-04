@@ -17,7 +17,7 @@
                 "cha": 12
             }],
             "timeLastOpened": "2026-08-01T20:00",
-            "name": "Lab",
+            "name": "New Lab",
             "timeCreated": "2026-06-01T20:00",
             "id": 1,
             "diceCalculations": [{
@@ -74,10 +74,10 @@
         },
         {
             "characters": [],
-            "timeLastOpened": "2026-08-03T12:34:27.556458",
-            "name": "hi",
-            "timeCreated": "2026-08-03T12:24:29.859101",
-            "id": 2,
+            "timeLastOpened": "2026-08-03T20:15:42.391634",
+            "name": "Another Adventure",
+            "timeCreated": "2026-08-03T20:03:58.887735",
+            "id": 6,
             "diceCalculations": [],
             "sessionNotes": [],
             "additionalNotes": [],
@@ -85,37 +85,15 @@
         },
         {
             "characters": [],
-            "timeLastOpened": "2026-08-03T14:22:58.952546",
-            "name": "new",
-            "timeCreated": "2026-08-03T14:22:58.952360",
-            "id": 3,
-            "diceCalculations": [],
-            "sessionNotes": [],
-            "additionalNotes": [],
-            "diceRolls": []
-        },
-        {
-            "characters": [],
-            "timeLastOpened": "2026-08-03T14:23:01.214702",
-            "name": "new2",
-            "timeCreated": "2026-08-03T14:23:01.214648",
-            "id": 4,
-            "diceCalculations": [],
-            "sessionNotes": [],
-            "additionalNotes": [],
-            "diceRolls": []
-        },
-        {
-            "characters": [],
-            "timeLastOpened": "2026-08-03T14:23:03.012056",
-            "name": "new3",
-            "timeCreated": "2026-08-03T14:23:03.012023",
-            "id": 5,
+            "timeLastOpened": "2026-08-03T23:02:31.878534",
+            "name": "Loooooooooooooooooog ass name",
+            "timeCreated": "2026-08-03T20:04:16.603614",
+            "id": 7,
             "diceCalculations": [],
             "sessionNotes": [],
             "additionalNotes": [],
             "diceRolls": []
         }
     ],
-    "pinnedSessions": [1]
+    "pinnedSessions": [6]
 }

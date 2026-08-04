@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -45,7 +46,7 @@ public class NotebookFrame extends JFrame implements ActionListener {
         readHub();
         setUpAutosaveTimer();
 
-        setSize(900, 650);
+        setSize(1000, 650);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -153,13 +154,30 @@ public class NotebookFrame extends JFrame implements ActionListener {
         return menuBar;
     }
 
+    // EFFECTS: formats the given panel vertically and wraps it in a scroll pane
+    // with no visible scroll bar
+    public JScrollPane wrapInScroll(JPanel panel) {
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        return scrollPane;
+    }
+
     public Hub getMainHub() {
         return mainHub;
     }
 
+    // EFFECTS: sets the current panel to session and change session open time.
     public void showSession(Session session) {
         session.markOpened();
-        // sessionPanel.setSession(session);
+        sessionPanel.setSession(session);
         panelManager.show(panelCollection, SESSION_STATE);
+    }
+
+    // EFFECTS: sets the current panel to hub
+    public void showHub() {
+        panelManager.show(panelCollection, HUB_STATE);
     }
 }
