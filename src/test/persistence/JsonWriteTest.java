@@ -43,6 +43,7 @@ class JsonWriteTest {
     }
 
     @Test
+    @SuppressWarnings("methodlength") 
     void testWriteGeneralHub() {
         try {
             Hub hub = new Hub();

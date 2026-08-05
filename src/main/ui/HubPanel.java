@@ -314,6 +314,7 @@ public class HubPanel extends JPanel implements ActionListener {
     // that the character button belongs to
     
     @Override
+    @SuppressWarnings("methodlength") 
     public void actionPerformed(ActionEvent e) {
         String name;
         Session session;

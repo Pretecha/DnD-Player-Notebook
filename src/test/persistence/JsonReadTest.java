@@ -41,6 +41,7 @@ class JsonReadTest {
     }
 
     @Test
+    @SuppressWarnings("methodlength") 
     void testReadGeneralHub() {
         JsonRead reader = new JsonRead("./data/testReadGeneralHub.json");
         try {

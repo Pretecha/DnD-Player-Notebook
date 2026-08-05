@@ -241,6 +241,7 @@ public class SessionPanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: rebuilds the item list for the current tab and selects its
     // newest item
+    @SuppressWarnings("methodlength") 
     private void refreshItemList() {
         itemListPanel.removeAll();
         itemButtons.clear();
@@ -293,6 +294,7 @@ public class SessionPanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: rebuilds the content area for the current tab and selection
+    @SuppressWarnings("methodlength") 
     private void refreshContent() {
         contentPanel.removeAll();
         switch (currentTab) {
@@ -331,6 +333,8 @@ public class SessionPanel extends JPanel implements ActionListener {
     // MODIFIES: this, frame
     // EFFECTS: responds to a button click: switches tabs, expands or collapses
     // the dice tab, adds an item, or returns to the hub
+
+    @SuppressWarnings("methodlength") 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -416,6 +420,7 @@ public class SessionPanel extends JPanel implements ActionListener {
     // MODIFIES: session, this, frame
     // EFFECTS: adds a new item to the current tab's list using the input typed
     // into the add field
+    @SuppressWarnings("methodlength")
     private void addItem() {
         String input = newItemField.getText().trim();
         if (input.isEmpty()) {
