@@ -1,10 +1,11 @@
 package model;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 // Represents the hub of the application, where the user can access all other sections
 public class Hub {
@@ -24,6 +25,7 @@ public class Hub {
     // EFFECTS: add a session to hub and give it an id
     public void addSession(Session session) {
         sessions.add(session);
+        EventLog.getInstance().logEvent(new Event("Session " + session.getName() + " added to hub"));
     }
 
     // EFFECTS: returns the session with the given id, or null if none exists
@@ -71,6 +73,7 @@ public class Hub {
     // MODIFIES: this
     // EFFECTS: delete a session in hub
     public void deleteSession(int id) {
+        EventLog.getInstance().logEvent(new Event("Session " + getSession(id).getName() + " deleted from hub"));
         sessions.removeIf(s -> s.getId() == id);
     }
 
@@ -86,6 +89,7 @@ public class Hub {
     // EFFECTS: add selected session into list of pinned sessions
     public void pinSession(int id) {
         pinnedSessionsId.add(id);
+        EventLog.getInstance().logEvent(new Event("Session " + getSession(id).getName() + " pinned"));
     }
 
     // REQUIRES: given id is present in pinnedSessionsId
@@ -93,6 +97,7 @@ public class Hub {
     // EFFECTS: remove selected session from list of pinned sessions
     public void unpinSession(int id) {
         pinnedSessionsId.remove(Integer.valueOf(id));
+        EventLog.getInstance().logEvent(new Event("Session " + getSession(id).getName() + " unpinned"));
     }
 
     // EFFECTS: returns the list of ids for sessions currently pinned

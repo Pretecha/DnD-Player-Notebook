@@ -52,6 +52,7 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: sets the name of this session
     public void setName(String name) {
+        EventLog.getInstance().logEvent(new Event("Session " + this.name + " renamed to " + name));
         this.name = name;
     }
 
@@ -61,6 +62,8 @@ public class Session {
     public void addCharacter(Character character) {
         characters.add(character);
         character.setSessionId(this.id);
+        EventLog.getInstance()
+                .logEvent(new Event("Character" + character.getName() + " added to Session " + this.getName()));
     }
 
     // MODIFIES: this, diceCalculation
@@ -69,6 +72,8 @@ public class Session {
     public void addDiceCalculation(DiceCalculation diceCalculation) {
         diceCalculations.add(diceCalculation);
         diceCalculation.setSessionId(this.id);
+        EventLog.getInstance().logEvent(
+                new Event("Dice Calculation" + diceCalculation.getName() + " added to Session " + this.getName()));
     }
 
     // MODIFIES: this, diceRoll
@@ -77,6 +82,8 @@ public class Session {
     public void addDiceRoll(DiceRoll diceRoll) {
         diceRolls.add(diceRoll);
         diceRoll.setSessionId(this.id);
+        EventLog.getInstance()
+                .logEvent(new Event("Dice Roll" + diceRoll.getId() + " added to Session " + this.getName()));
     }
 
     // MODIFIES: this, sessionNote
@@ -85,6 +92,8 @@ public class Session {
     public void addSessionNote(SessionNote sessionNote) {
         sessionNotes.add(sessionNote);
         sessionNote.setSessionId(this.id);
+        EventLog.getInstance()
+                .logEvent(new Event("Session Note" + sessionNote.getTitle() + " added to Session " + this.getName()));
     }
 
     // MODIFIES: this, additionalNote
@@ -93,6 +102,8 @@ public class Session {
     public void addAdditionalNote(AdditionalNote additionalNote) {
         additionalNotes.add(additionalNote);
         additionalNote.setSessionId(this.id);
+        EventLog.getInstance().logEvent(
+                new Event("Additional Note" + additionalNote.getTitle() + " added to Session " + this.getName()));
     }
 
     // EFFECTS: returns the character with the given id, or null if none exists
@@ -175,30 +186,35 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a character in session
     public void deleteCharacter(int id) {
+        EventLog.getInstance().logEvent(new Event("Character" + getCharacter(id).getName() + " removed from Session " + this.getName()));
         characters.removeIf(c -> c.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete a dice calculation in session
     public void deleteDiceCalculation(int id) {
+        EventLog.getInstance().logEvent(new Event("Dice Calculation" + getDiceCalculation(id).getName() + " removed from Session " + this.getName()));
         diceCalculations.removeIf(c -> c.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete a dice roll in session
     public void deleteDiceRoll(int id) {
+        EventLog.getInstance().logEvent(new Event("Dice Roll" + id + " removed from Session " + this.getName()));
         diceRolls.removeIf(r -> r.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete a session note in session
     public void deleteSessionNote(int id) {
+        EventLog.getInstance().logEvent(new Event("Session Note" + getSessionNote(id).getTitle() + " removed from Session " + this.getName()));
         sessionNotes.removeIf(n -> n.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete an additional note in session
     public void deleteAdditionalNote(int id) {
+        EventLog.getInstance().logEvent(new Event("Additional Note" + getAdditionalNote(id).getTitle() + " removed from Session " + this.getName()));
         additionalNotes.removeIf(n -> n.getId() == id);
     }
 

@@ -5,24 +5,24 @@
             "con": 0,
             "levelAndClass": "",
             "race": "Autognome",
-            "sessionId": 60,
+            "sessionId": 61,
             "intel": 0,
             "str": 0,
             "background": "",
             "dex": 0,
             "name": "TestSubject",
-            "id": 47,
+            "id": 48,
             "alignment": "",
             "cha": 0
         }],
-        "timeLastOpened": "2026-08-02T16:04:33.780151",
+        "timeLastOpened": "2026-08-09T16:34:45.755104",
         "name": "Test",
-        "timeCreated": "2026-08-02T16:04:33.779854",
-        "id": 60,
+        "timeCreated": "2026-08-09T16:34:45.754829",
+        "id": 61,
         "diceCalculations": [],
         "sessionNotes": [],
         "additionalNotes": [],
         "diceRolls": []
     }],
-    "pinnedSessions": [60]
+    "pinnedSessions": [61]
 }

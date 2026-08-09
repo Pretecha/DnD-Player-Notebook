@@ -110,6 +110,7 @@ public class NotebookFrame extends JFrame implements ActionListener {
     protected void processWindowEvent(WindowEvent e) {
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
             saveHub();
+            printLog();
             System.exit(0);
         } else {
             super.processWindowEvent(e);
@@ -177,5 +178,14 @@ public class NotebookFrame extends JFrame implements ActionListener {
     public void showHub() {
         panelManager.show(panelCollection, HUB_STATE);
         hubPanel.refresh();
+    }
+
+    // EFFECTS: prints all logged events in EventLog since the start of this user
+    // session
+    private void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println(next.toString());
+            System.out.println();
+        }
     }
 }
