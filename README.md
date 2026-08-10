@@ -103,7 +103,7 @@ Session Dragon Lance deleted from hub
 
 The diagram is centered around Hub and Session, with all other classes from the model package branching off of them. Every association within the model package is an aggregation, meaning the model is built entirely on containment. The classes in the ui package hold plain references rather than aggregating anything. Due to most of the classes in the ui package being helper classes, they aren't considered as associations with the rest of the classes, leaving them without arrows. 
 
-# Reflection
+## Reflection
 If I had more time, there are several refactorings I would apply. A parent type could have been created for the different components of a session (Character, DiceRoll, etc), which would make Session far more concise and remove much of the repeated code in both the model and the ui. Exceptions could have been used to signal unwanted results, such as missing id for a component, rather than handling every case with if and else statements, and some of the more conditional logic, such as pinning and unpinning, could have been moved into the ui classes to reduce coupling.
 
 Subclasses of the panels could also have been created, since SessionPanel has grown large enough that it handles navigation, item listing, and form building all at once. Most importantly, given more time I would have completed the remaining functionality of the application, as several user stories are supported by the model but are not yet reachable through the GUI.
