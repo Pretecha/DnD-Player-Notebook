@@ -50,7 +50,7 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 - As a user, I want to be able to save the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, to file automatically closing the application, and also be able to manually save whenever I choose to.
 - As a user, I want to be able to load the entire state of my hub, including all sessions and the characters, dice rolls, dice calculations, session notes, and additional notes associated with each session, in the exact state that I left it as, from file automatically, and also be able to manually load whenever I choose to.
 
-# Instructions for End User
+## Instructions for End User
 
 - You can view the panel that displays the Sessions that have already been added to the Hub by launching the application. The Hub panel displays three columns, with every session listed in the middle "Sessions" column.
 - You can generate the first required action related to the user story "adding multiple Sessions to a Hub" by typing a session name into the text field at the bottom of the Sessions column and clicking the "add" button.
@@ -58,3 +58,42 @@ The DnD Player Notebook serves as an all-in-one player toolkit containing all th
 - You can locate my visual component by looking at the top of the Hub screen. There is an image displayed as the title.
 - You can save the state of my application by selecting File > Save from the menu bar. The application also saves automatically when the window is closed, and a few seconds after any edit.
 - You can reload the state of my application by selecting File > Load from the menu bar. The application also loads automatically on startup.
+
+## Phase 4: Task 2
+
+Representative sample of events logged during a run of the application:
+
+```
+Sun Aug 09 16:28:20 PDT 2026
+Session Dragon Lance added to hub
+
+Sun Aug 09 16:28:22 PDT 2026
+Session Dragon Lance pinned
+
+Sun Aug 09 16:28:24 PDT 2026
+Session Dragon Lance unpinned
+
+Sun Aug 09 16:28:25 PDT 2026
+Character Steve added to Session Dragon Lance
+
+Sun Aug 09 16:28:29 PDT 2026
+Dice Roll 3 added to Session Dragon Lance
+
+Sun Aug 09 16:28:40 PDT 2026
+Dice Calculation Possible Stats From Rolling added to Session Dragon Lance
+
+Sun Aug 09 16:29:23 PDT 2026
+Session Note Session 0 added to Session Dragon Lance
+
+Sun Aug 09 16:29:39 PDT 2026
+Additional Note Companion Stat Block added to Session Dragon Lance
+
+Sun Aug 09 16:29:51 PDT 2026
+Character Steve removed from Session Dragon Lance
+
+Sun Aug 09 16:29:52 PDT 2026
+Character Steven added to Session Dragon Lance
+
+Sun Aug 09 16:29:59 PDT 2026
+Session Dragon Lance deleted from hub
+```
