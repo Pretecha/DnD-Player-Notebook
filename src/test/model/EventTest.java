@@ -14,54 +14,54 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Unit tests for the Event class
  */
 public class EventTest {
-    private Event e;
-    private Date d;
+    private Event event;
+    private Date date;
 
     @BeforeEach
     public void runBefore() {
-        e = new Event("Sensor open at door");
-        d = Calendar.getInstance().getTime();
+        event = new Event("Sensor open at door");
+        date = Calendar.getInstance().getTime();
     }
 
     @Test
     public void testEvent() {
-        assertEquals("Sensor open at door", e.getDescription());
-        assertTrue(!d.before(e.getDate()));
+        assertEquals("Sensor open at door", event.getDescription());
+        assertTrue(!date.before(event.getDate()));
     }
 
     @Test
     public void testToString() {
-        assertEquals(d.toString() + "\n" + "Sensor open at door", e.toString());
+        assertEquals(date.toString() + "\n" + "Sensor open at door", event.toString());
     }
 
     @Test
     public void testEqualsNull() {
-        assertFalse(e.equals(null));
+        assertFalse(event.equals(null));
     }
 
     @Test
     public void testEqualsDifferentClass() {
-        assertFalse(e.equals("Sensor open at door"));
+        assertFalse(event.equals("Sensor open at door"));
     }
 
     @Test
     public void testEqualsSameValues() {
         Event other = new Event("Sensor open at door");
-        if (e.getDate().equals(other.getDate())) {
-            assertTrue(e.equals(other));
-            assertEquals(e.hashCode(), other.hashCode());
+        if (event.getDate().equals(other.getDate())) {
+            assertTrue(event.equals(other));
+            assertEquals(event.hashCode(), other.hashCode());
         }
     }
 
     @Test
     public void testEqualsDifferentDescription() {
         Event other = new Event("Sensor closed at door");
-        assertFalse(e.equals(other));
+        assertFalse(event.equals(other));
     }
 
     @Test
     public void testEqualsItself() {
-        assertTrue(e.equals(e));
-        assertEquals(e.hashCode(), e.hashCode());
+        assertTrue(event.equals(event));
+        assertEquals(event.hashCode(), event.hashCode());
     }
 }

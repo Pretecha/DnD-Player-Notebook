@@ -186,14 +186,16 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a character in session
     public void deleteCharacter(int id) {
-        EventLog.getInstance().logEvent(new Event("Character " + getCharacter(id).getName() + " removed from Session " + this.getName()));
+        EventLog.getInstance().logEvent(
+                new Event("Character " + getCharacter(id).getName() + " removed from Session " + this.getName()));
         characters.removeIf(c -> c.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete a dice calculation in session
     public void deleteDiceCalculation(int id) {
-        EventLog.getInstance().logEvent(new Event("Dice Calculation " + getDiceCalculation(id).getName() + " removed from Session " + this.getName()));
+        EventLog.getInstance().logEvent(new Event(
+                "Dice Calculation " + getDiceCalculation(id).getName() + " removed from Session " + this.getName()));
         diceCalculations.removeIf(c -> c.getId() == id);
     }
 
@@ -207,14 +209,16 @@ public class Session {
     // MODIFIES: this
     // EFFECTS: delete a session note in session
     public void deleteSessionNote(int id) {
-        EventLog.getInstance().logEvent(new Event("Session Note " + getSessionNote(id).getTitle() + " removed from Session " + this.getName()));
+        EventLog.getInstance().logEvent(
+                new Event("Session Note " + getSessionNote(id).getTitle() + " removed from Session " + this.getName()));
         sessionNotes.removeIf(n -> n.getId() == id);
     }
 
     // MODIFIES: this
     // EFFECTS: delete an additional note in session
     public void deleteAdditionalNote(int id) {
-        EventLog.getInstance().logEvent(new Event("Additional Note " + getAdditionalNote(id).getTitle() + " removed from Session " + this.getName()));
+        EventLog.getInstance().logEvent(new Event(
+                "Additional Note " + getAdditionalNote(id).getTitle() + " removed from Session " + this.getName()));
         additionalNotes.removeIf(n -> n.getId() == id);
     }
 
